@@ -17,7 +17,7 @@ function UserLogin() {
       [e.target.name]: e.target.value,
     });
   };
-
+  // console.log(values);
   const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = validate(values);
@@ -25,10 +25,10 @@ function UserLogin() {
 
     if (Object.keys(validationErrors).length === 0) {
       axios
-        .post("http://localhost:8080/login", values)
+        .post("http://localhost:8080/user/login", values)
         .then((res) => {
-          if (res.data.Token) {
-            localStorage.setItem("token", res.data.Token);
+          if (res.data.login) {
+            localStorage.setItem("Token", res.data.token);
             navigate("/user/dashboard");
           } else {
             alert("No records");
