@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import reg_validation from "../validation/register-validation";
 import { Link, useNavigate } from "react-router-dom";
 
-function Register() {
+function UserRegister() {
   const [values, setValues] = useState({
     name: "",
     email: "",
@@ -33,7 +33,7 @@ function Register() {
 
     if (Object.keys(validationErrors).length === 0) {
       try {
-        const response = await fetch("http://localhost:8080/register", {
+        const response = await fetch("http://localhost:8080/userUserRegister", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -298,7 +298,7 @@ function Register() {
                 type="submit"
                 className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               >
-                Register
+                UserRegister
               </button>
               <Link to={"/"}>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
@@ -399,4 +399,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default UserRegister;

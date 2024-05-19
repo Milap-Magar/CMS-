@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import validate from "../validation/validation";
 
-function Login() {
+function UserLogin() {
   const navigate = useNavigate();
   const [values, setValues] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
@@ -167,4 +167,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default UserLogin;
