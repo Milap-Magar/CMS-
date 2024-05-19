@@ -1,12 +1,11 @@
 import React from "react";
-import logo from "../public/image.png";
-import "./style.css";
+import logo from "../assets/logo.png";
 
 const Sidebar = () => {
   return (
     <div className="flex flex-col h-screen p-3 bg-amber-400 shadow-red-700 shadow-2xl w-60">
       <figure>
-        <img src={logo} alt="logo" className={`logo w-full h-[10vh]`} />
+        <img src={logo} alt="logo" className={`logo w-full h-[10vh] mix-blend-multiply`} />
       </figure>
 
       <div className="space-y-6">

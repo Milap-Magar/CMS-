@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import Image from "../assets/background.jpg";
+import Logo from "../assets/logo.png";
 import validate from "../validation/validation";
 
 function UserLogin() {
@@ -25,11 +27,9 @@ function UserLogin() {
       axios
         .post("http://localhost:8080/login", values)
         .then((res) => {
-          // console.log(res);
           if (res.data.Token) {
             localStorage.setItem("token", res.data.Token);
-            // alert("Login successful, navigating to /admin/dashboard");
-            navigate("/admin/dashboard");
+            navigate("/user/dashboard");
           } else {
             alert("No records");
           }
@@ -49,11 +49,17 @@ function UserLogin() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full">
+    <div
+      className="relative min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-cover bg-center"
+      style={{ backgroundImage: `url(${Image})` }}
+    >
+      <div className="max-w-md w-full z-10">
         <div className="bg-white px-8 pt-6 pb-8 mb-4 shadow-2xl shadow-slate-700 rounded-xl">
-          <h2 className="text-center text-3xl font-extrabold text-gray-900 mb-4">
-            Login Form
+          <figure>
+            <img src={Logo} alt="logo image" className="h-[30vh] w-[50vw]"/>
+          </figure>
+          <h2 className="text-center text-xl font-medium text-gray-900 mb-4 font-mono">
+            Student Login Page
           </h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
@@ -111,7 +117,7 @@ function UserLogin() {
               >
                 Log In
               </button>
-              <Link to={"/register"}>
+              <Link to={"/user/register"}>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                   Register
                 </button>

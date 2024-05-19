@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import reg_validation from "../validation/register-validation";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import Image from "../assets/background.jpg";
+import Logo from "../assets/logo.png";
 
 function Register() {
   const [values, setValues] = useState({
@@ -9,15 +12,16 @@ function Register() {
     password: "",
     phone: "",
     address: "",
-    symbolNo: "",
-    semester: "",
+    symbol: "",
     program: "",
-    role: "isAdmin",
+    semester: "",
+    role: "isStudent",
   });
+
   const [errors, setErrors] = useState({});
   const [showModal, setShowModal] = useState(false);
-  const [apiResponse, setApiResponse] = useState(null); // To handle API responses
-  const navigate = useNavigate(); // Use navigate hook
+  const [apiResponse, setApiResponse] = useState(null);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setValues({
@@ -33,30 +37,24 @@ function Register() {
 
     if (Object.keys(validationErrors).length === 0) {
       try {
-        const response = await fetch("http://localhost:8080/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values),
-        });
+        const response = await axios.post(
+          "http://localhost:8080/user/register",
+          values
+        );
 
-        const data = await response.json();
-
-        if (response.ok) {
+        if (response.status === 200) {
           setApiResponse({
             success: true,
             message: "Registration successful!",
           });
-          console.log("Registration successful:", data);
-          // Redirect to login page after successful registration
-          navigate("/");
+          console.log("Registration successful:", response.data);
+          navigate("/user/login");
         } else {
           setApiResponse({
             success: false,
-            message: data.error || "Registration failed",
+            message: response.data.error || "Registration failed",
           });
-          console.log("Registration failed:", data);
+          console.log("Registration failed:", response.data);
         }
       } catch (error) {
         setApiResponse({
@@ -75,11 +73,17 @@ function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div
+      className={`min-h-screen flex items-center justify-center bg-cover bg-center  py-12 px-4 sm:px-6 lg:px-8`}
+      style={{ backgroundImage: `url(${Image})` }}
+    >
       <div className="max-w-lg w-full">
         <div className="bg-white shadow-2xl shadow-slate-500 rounded-lg px-8 pt-6 pb-8 mb-4">
-          <h2 className="text-center text-3xl font-extrabold text-gray-900 mb-4">
-            Registration Form
+          <figure>
+            <img src={Logo} alt="logo image" className="h-[40vh] w-[50vw]" />
+          </figure>
+          <h2 className="text-center text-xl font-medium text-gray-900 mb-4 font-mono">
+            Student Registration Form
           </h2>
           <form onSubmit={handleSubmit}>
             {/* Form fields go here, unchanged */}

@@ -1,67 +1,115 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { FiMenu, FiSearch, FiX } from "react-icons/fi";
 import Image from "../assets/background.jpg";
 import Logo from "../assets/logo.jpeg";
 
 const Main = () => {
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth > 768);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth > 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
-    <>
-      <div className="w-full h-screen relative">
-        <figure className="w-full h-full absolute top-0 left-0">
+    <div className="relative overflow-hidden h-screen">
+      <figure className="absolute inset-0">
+        <img
+          src={Image}
+          alt="main image"
+          className="w-full h-full object-cover"
+        />
+      </figure>
+
+      {/* Nav content section */}
+      <nav className="flex items-center justify-between p-5 absolute top-0 left-0 right-0 bg-opacity-50 bg-slate-300 text-slate-900">
+        <figure>
           <img
-            src={Image}
-            alt="main image"
-            className="w-full h-full object-cover"
+            src={Logo}
+            alt="logo"
+            className="w-16 h-16 md:w-24 md:h-24 object-contain mix-blend-multiply"
           />
         </figure>
-        <nav className="flex items-center justify-between p-4 absolute top-0 left-0 w-full h-[20vh] z-10 bg-opacity-50 bg-slate-300 text-slate-900">
-          <figure>
-            <img
-              src={Logo}
-              alt="logo"
-              className="w-24 h-24 object-contain mix-blend-multiply"
-            />
-          </figure>
-
-          <div className="absolute inset-0 flex flex-col items-center justify-center space-y-2">
-            <h3 className="text-5xl font-bold text-slate-900 drop-shadow-lg animate-pulse">
+        <div className="flex items-center justify-center flex-grow ps-10">
+          <div>
+            <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-center">
               Patan Multiple Campus
             </h3>
-            <div className="text-lg text-slate-600 text-center">
+            <div className="text-lg text-slate-600 text-center ">
               <p>Patandhoka, Lalitpur</p>
               <p>Phone No: 01-1234567</p>
             </div>
           </div>
+        </div>
 
-          <ul className="flex space-x-4">
-            <li>
-              <Link
-                to={"/user/login"}
-                className="relative inline-block text-slate-900 after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bg-slate-900 after:left-0 after:bottom-0 after:origin-bottom-right after:transition-transform after:duration-500 after:ease-in-out hover:after:scale-x-100 hover:after:origin-bottom-left"
-              >
-                User Login
-              </Link>
-            </li>
-            <li>
-              <Link
-                to={"/user/register"}
-                className="relative inline-block text-slate-900 after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bg-slate-900 after:left-0 after:bottom-0 after:origin-bottom-right after:transition-transform after:duration-500 after:ease-in-out hover:after:scale-x-100 hover:after:origin-bottom-left"
-              >
-                User Register
-              </Link>
-            </li>
-            <li>
-              <Link
-                to={"/admin/login"}
-                className="relative inline-block text-slate-900 after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bg-slate-900 after:left-0 after:bottom-0 after:origin-bottom-right after:transition-transform after:duration-500 after:ease-in-out hover:after:scale-x-100 hover:after:origin-bottom-left"
-              >
-                Admin Login
-              </Link>
-            </li>
-          </ul>
-        </nav>
+        {/* list bar */}
+        <ul
+          className={`flex flex-col sm:flex sm:flex-col md:flex md:flex-row gap-3 md:gap-10 text-black`}
+        >
+          <li>
+            <Link
+              to={"/user/login"}
+              className="bg-green-400 hover:text-white text-sm md:text-lg px-1 py-1 md:px-6 md:py-2 rounded-2xl transition duration-1000"
+            >
+              Student Login
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={"/user/register"}
+              className="hover:bg-sky-400 hover:text-white text-xs md:text-lg px-0 py-0 md:px-6 md:py-2 rounded-2xl transition duration-700"
+            >
+              Student Register
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={"/admin/login"}
+              className="hover:bg-sky-400 hover:text-white text-xs md:text-lg px-1 py-1 md:px-6 md:py-2 rounded-2xl transition duration-700"
+            >
+              Admin Login
+            </Link>
+          </li>
+        </ul>
+      </nav>
+
+      {/* Main content section */}
+      <div className="absolute inset-x-0 top-56 flex items-center justify-center h-auto px-4 sm:px-8 py-4">
+        <div className="text-center">
+          <div className="container bg-white p-5 rounded-2xl">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-3xl font-bold text-slate-900 mb-4">
+              Complain Management System
+            </h1>
+            <span className="text-xl sm:text-xl md:text-xl lg:text-2xl font-normal text-slate-900 mb-4">
+              A Complaint Management System improves communication,
+              accountability, trust, and efficiency, fostering a positive,
+              transparent, and responsive school environment.
+            </span>
+          </div>
+          <h2 className="text-2xl sm:text-lg md:text-xl lg:text-xl font-light text-slate-900 mb-4 mt-5">
+            How can I help you?
+          </h2>
+          <input
+            type="text"
+            placeholder="Enter your complain-code to check...."
+            className="px-4 py-2 w-full sm:w-[30vw] text-slate-700 border-2 border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent"
+          />
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 
