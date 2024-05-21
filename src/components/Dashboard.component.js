@@ -20,7 +20,7 @@ const Dashboard = () => {
   
         const res = await axios.get("http://localhost:8080/dashboard", {
           headers: {
-            Authorization: `Bearer ${token}`, // Set the token in the Authorization header
+            Authorization: `Bearer ${token}`, 
           },
         });
   
