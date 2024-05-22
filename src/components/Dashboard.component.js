@@ -33,7 +33,7 @@ const Dashboard = () => {
     };
   
     fetchDashboardData();
-  }, []); // Empty dependency array ensures that the effect runs only once, when the component mountsx
+  }, []);
   
 
   return (
