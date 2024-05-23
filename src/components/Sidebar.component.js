@@ -1,34 +1,95 @@
-import React from "react";
-import logo from "../assets/logo.png";
+import React, { useState } from "react";
+import axios from "axios";
+import logo from "../assets/pfp.jpg";
+import { FaArrowLeft } from "react-icons/fa";
+import { LuLayoutDashboard, LuInbox } from "react-icons/lu";
+import { IoSettingsOutline } from "react-icons/io5";
+import { CgProfile, CgLogOut } from "react-icons/cg";
+import { useNavigate } from "react-router-dom";
 
-const Sidebar = () => {
+const Sidebar = ({ userData }) => {
+  // console.log("🚀 ~ Sidebar ~ userData:", userData);
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Remove token from localStorage
+    localStorage.removeItem("Token");
+    // axios.defaults.headers.common["Authorization"] = null;
+
+    // window.location.href = "/login";
+    navigate("/");
+  };
+
+  const [open, setOpen] = useState(true);
+  const Menus = [
+    { title: "Dashboard", src: <LuLayoutDashboard className="h-8 w-7" /> },
+    { title: "Complaints", src: <LuInbox className="h-8 w-7" /> },
+    { title: "Accounts", src: <CgProfile className="h-8 w-7" /> },
+    {
+      title: "Settings",
+      src: <IoSettingsOutline className="h-8 w-7" />,
+      gap: true,
+    },
+    {
+      title: "Logout",
+      src: <CgLogOut className="h-8 w-7" />,
+      onClick: handleLogout,
+    },
+  ];
+
   return (
-    <div className="flex flex-col h-screen p-3 bg-amber-400 shadow-red-700 shadow-2xl w-60">
-      <figure>
-        <img src={logo} alt="logo" className={`logo w-full h-[10vh] mix-blend-multiply`} />
-      </figure>
+    <>
+      <div className="flex">
+        <div
+          className={`${
+            open ? "w-60" : "w-20 pt-8"
+          } duration-500 h-screen bg-amber-600 relative p-3 `}
+        >
+          <FaArrowLeft
+            className={`absolute cursor-pointer duration-1000 -right-3 top-16 w-10 h-10 p-2 border-2 border-amber-600 bg-white rounded-full ${
+              open && "rotate-180 duration-1000"
+            }`}
+            onClick={() => setOpen(!open)}
+          />
+          <figure className="flex gap-x-4 items-center">
+            <img
+              src={logo}
+              alt="Logo image"
+              className={`cursor-pointer duration-500 h-44 w-48 border-2 rounded-full border-white bg-white ${
+                !open && "rotate-[360deg] w-auto h-6 ms-3"
+              }`}
+            />
+          </figure>
 
-      <div className="space-y-6">
-        <div className="py-10 flex justify-center items-center">
-          <h2 className="text-xl font-bold">
-            <a href="/dashboard">Admin Dashboard</a>
+          <h2
+            className={`text-white origin-left font-medium text-xl text-center duration-500 -ms-5 ${
+              !open && "scale-0"
+            }`}
+          >
+            {userData.name.charAt(0).toUpperCase() + userData.name.slice(1)}
           </h2>
-        </div>
-        <div className="flex-1">
-          <ul className="gap-5 space-y-5 text-sm flex flex-col justify-start items-center">
-            <li>
-              <a href="/analytics">Analytics</a>
-            </li>
-            <li>
-              <a href="/settings">Settings</a>
-            </li>
-            <li>
-              <a href="/">Home</a>
-            </li>
+          <ul className="pt-6">
+            {Menus.map((menu, index) => (
+              <li
+                key={index}
+                className={`text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-amber-800 rounded-md ${
+                  menu.gap ? "mt-9" : "mt-2"
+                }`}
+                onClick={menu.onClick}
+              >
+                {menu.src}
+                <span
+                  className={`${!open && "hidden"} origin-left duration-200`}
+                >
+                  {menu.title}
+                </span>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

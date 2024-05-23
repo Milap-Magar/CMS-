@@ -4,7 +4,7 @@ import { jwtDecode } from "jwt-decode";
 
 const PrivateRoutes = () => {
   const token = localStorage.getItem("Token");
-  console.log("Retrieved token from localStorage:", token);
+  // console.log("Retrieved token from localStorage:", token);
 
   let isValidToken = false;
   if (token) {

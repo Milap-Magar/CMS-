@@ -33,6 +33,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = reg_validation(values);
+    console.log("🚀 ~ handleSubmit ~ values:", values);
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
@@ -80,7 +81,7 @@ function Register() {
       <div className="max-w-lg w-full">
         <div className="bg-white shadow-2xl shadow-slate-500 rounded-lg px-8 pt-6 pb-8 mb-4">
           <figure>
-            <img src={Logo} alt="logo image" className="h-[40vh] w-[50vw]" />
+            <img src={Logo} alt="logo" className="h-[40vh] w-[50vw]" />
           </figure>
           <h2 className="text-center text-xl font-medium text-gray-900 mb-4 font-mono">
             Student Registration Form
@@ -209,25 +210,25 @@ function Register() {
             </div>
             <div className="mb-4">
               <label
-                htmlFor="symbolNo"
+                htmlFor="symbol"
                 className="block text-gray-700 text-sm font-bold mb-2"
               >
                 Symbol No
               </label>
               <input
-                id="symbolNo"
-                name="symbolNo"
+                id="symbol"
+                name="symbol"
                 type="number"
                 required
                 className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                  errors.symbolNo ? "border-red-500" : ""
+                  errors.symbol ? "border-red-500" : ""
                 }`}
                 placeholder="Enter your symbol number"
-                value={values.symbolNo}
+                value={values.symbol}
                 onChange={handleChange}
               />
-              {errors.symbolNo && (
-                <p className="text-red-500 text-xs italic">{errors.symbolNo}</p>
+              {errors.symbol && (
+                <p className="text-red-500 text-xs italic">{errors.symbol}</p>
               )}
             </div>
             <div className="mb-4">
@@ -284,14 +285,14 @@ function Register() {
                 <option value="" disabled>
                   Select Semester
                 </option>
-                <option value="first">First</option>
-                <option value="second">Second</option>
-                <option value="third">Third</option>
-                <option value="fourth">Fourth</option>
-                <option value="fifth">Fifth</option>
-                <option value="sixth">Sixth</option>
-                <option value="seventh">Seventh</option>
-                <option value="eighth">Eighth</option>
+                <option value="1">First</option>
+                <option value="2">Second</option>
+                <option value="3">Third</option>
+                <option value="4">Fourth</option>
+                <option value="5">Fifth</option>
+                <option value="6">Sixth</option>
+                <option value="7">Seventh</option>
+                <option value="8">Eighth</option>
               </select>
               {errors.semester && (
                 <p className="text-red-500 text-xs italic">{errors.semester}</p>
