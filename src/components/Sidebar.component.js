@@ -25,7 +25,7 @@ const Sidebar = ({ userData }) => {
   const Menus = [
     { title: "Dashboard", src: <LuLayoutDashboard className="h-8 w-7" /> },
     { title: "Complaints", src: <LuInbox className="h-8 w-7" /> },
-    { title: "Accounts", src: <CgProfile className="h-8 w-7" /> },
+    { title: "Account Settings", src: <CgProfile className="h-8 w-7" /> },
     {
       title: "Settings",
       src: <IoSettingsOutline className="h-8 w-7" />,
@@ -34,6 +34,7 @@ const Sidebar = ({ userData }) => {
     {
       title: "Logout",
       src: <CgLogOut className="h-8 w-7" />,
+      gaps: true,
       onClick: handleLogout,
     },
   ];
@@ -74,7 +75,7 @@ const Sidebar = ({ userData }) => {
               <li
                 key={index}
                 className={`text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-amber-800 rounded-md ${
-                  menu.gap ? "mt-9" : "mt-2"
+                  menu.gap ? "mt-9" : "mt-2" 
                 }`}
                 onClick={menu.onClick}
               >

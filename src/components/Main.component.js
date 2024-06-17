@@ -1,26 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Main = ({ userData, error }) => {
+  useEffect(() => {
+    if (userData && userData.name) {
+      toast.dismiss();
+      toast.success(`Hi ${userData.name}! Welcome to the system.`, {
+        className: "custom-toast",
+      });
+    }
+  }, [userData]);
+
   if (error) {
     return <div>Error: {error}</div>;
   }
 
   return (
     <>
-      <div>
-        <h2>Welcome, {userData.name}</h2>
-        <p>Email: {userData.email}</p>
-        <p>Phone: {userData.phone}</p>
-        <p>Address: {userData.address}</p>
-      </div>
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="flex flex-col justify-center items-center py-8">
+      <ToastContainer limit={1} toastClassName="custom-toast-container" />
+      <div className="container mx-auto">
+        <div className="w-full flex flex-col justify-center items-center py-8 bg-amber-500 text-white text-xl shadow-xl shadow-amber-400">
           <h6>Patan Multiple Campus</h6>
-          <h2 className="text-3xl text-slate-700">
+          <h2 className="text-xl sm:2xl md:3xl lg:5xl text-slate-900">
             Complain Management System
           </h2>
         </div>
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 pt-16">
           <div className="w-full px-4 py-5 bg-amber-200 rounded-lg shadow-lg shadow-orange-400">
             <div className="text-sm font-medium text-gray-500 truncate">
               Total Complaints
