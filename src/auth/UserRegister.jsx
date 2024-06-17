@@ -81,7 +81,11 @@ function Register() {
       <div className="max-w-lg w-full">
         <div className="bg-white shadow-2xl shadow-slate-500 rounded-lg px-8 pt-6 pb-8 mb-4">
           <figure>
-            <img src={Logo} alt="logo" className="h-[40vh] w-[50vw]" />
+            <img
+              src={Logo}
+              alt="logo"
+              className="h-[30vh] w-[80vw] md:h-[35vh] md:w-[50vw]"
+            />
           </figure>
           <h2 className="text-center text-xl font-medium text-gray-900 mb-4 font-mono">
             Student Registration Form

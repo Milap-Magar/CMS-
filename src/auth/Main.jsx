@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FiMenu, FiSearch, FiX } from "react-icons/fi";
+// import { FiMenu, FiSearch, FiX } from "react-icons/fi";
 import Image from "../assets/background.jpg";
 import Logo from "../assets/logo.jpeg";
 
@@ -35,7 +35,7 @@ const Main = () => {
       </figure>
 
       {/* Nav content section */}
-      <nav className="flex items-center justify-between p-5 absolute top-0 left-0 right-0 bg-opacity-50 bg-slate-300 text-slate-900">
+      <nav className="flex items-center justify-between py-5 px-1 absolute top-0 left-0 right-0 bg-opacity-50 bg-slate-300 text-slate-900">
         <figure>
           <img
             src={Logo}
@@ -43,12 +43,12 @@ const Main = () => {
             className="w-16 h-16 md:w-24 md:h-24 object-contain mix-blend-multiply"
           />
         </figure>
-        <div className="flex items-center justify-center flex-grow ps-10">
+        <div className="flex items-center justify-center flex-grow ps-4">
           <div>
-            <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-center">
+            <h3 className="text-md sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl font-bold text-center pb-1">
               Patan Multiple Campus
             </h3>
-            <div className="text-lg text-slate-600 text-center ">
+            <div className="text-sm text-slate-600 text-center ">
               <p>Patandhoka, Lalitpur</p>
               <p>Phone No: 01-1234567</p>
             </div>
@@ -57,12 +57,12 @@ const Main = () => {
 
         {/* list bar */}
         <ul
-          className={`flex flex-col sm:flex sm:flex-col md:flex md:flex-row gap-3 md:gap-10 text-black`}
+          className={`flex flex-col sm:flex sm:flex-col md:flex md:flex-row gap-2 items-center text-black md:text-sm sm:text-sm text-xs`}
         >
           <li>
             <Link
               to={"/user/login"}
-              className="bg-green-400 hover:text-white text-sm md:text-lg px-1 py-1 md:px-6 md:py-2 rounded-2xl transition duration-1000"
+              className="bg-green-400 hover:text-white px-1 py-1 md:px-4 md:py-2 rounded-md transition duration-1000"
             >
               Student Login
             </Link>
@@ -70,7 +70,7 @@ const Main = () => {
           <li>
             <Link
               to={"/user/register"}
-              className="hover:bg-sky-400 hover:text-white text-xs md:text-lg px-0 py-0 md:px-6 md:py-2 rounded-2xl transition duration-700"
+              className="hover:bg-sky-400 hover:text-white px-0 py-0 md:px-6 md:py-2 rounded-2xl transition duration-700"
             >
               Student Register
             </Link>
@@ -78,7 +78,7 @@ const Main = () => {
           <li>
             <Link
               to={"/admin/login"}
-              className="hover:bg-sky-400 hover:text-white text-xs md:text-lg px-1 py-1 md:px-6 md:py-2 rounded-2xl transition duration-700"
+              className="hover:bg-sky-400 hover:text-white px-1 py-1 md:px-6 md:py-2 rounded-2xl transition duration-700"
             >
               Admin Login
             </Link>
@@ -87,7 +87,7 @@ const Main = () => {
       </nav>
 
       {/* Main content section */}
-      <div className="absolute inset-x-0 top-56 flex items-center justify-center h-auto px-4 sm:px-8 py-4">
+      <div className="absolute inset-x-0 top-36 flex items-center justify-center h-auto px-4 sm:px-8 py-4">
         <div className="text-center">
           <div className="container bg-white p-5 rounded-2xl">
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-3xl font-bold text-slate-900 mb-4">

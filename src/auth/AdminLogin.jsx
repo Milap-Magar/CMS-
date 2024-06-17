@@ -56,7 +56,11 @@ function AdminLogin() {
       <div className="max-w-md w-full z-10">
         <div className="bg-white px-8 pt-6 pb-8 mb-4 shadow-2xl shadow-slate-700 rounded-xl">
           <figure>
-            <img src={Logo} alt="logo image" className="h-[30vh] w-[50vw]"/>
+            <img
+              src={Logo}
+              alt="logo image"
+              className="h-[30vh] w-[80vw] md:h-[35vh] md:w-[50vw]"
+            />
           </figure>
           <h2 className="text-center text-xl font-medium text-gray-900 mb-4 font-mono">
             Admin Login Page
