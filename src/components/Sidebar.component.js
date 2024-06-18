@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
 import logo from "../assets/pfp.jpg";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaHistory  } from "react-icons/fa";
 import { LuLayoutDashboard, LuInbox } from "react-icons/lu";
 import { IoSettingsOutline } from "react-icons/io5";
 import { CgProfile, CgLogOut } from "react-icons/cg";
@@ -21,10 +20,19 @@ const Sidebar = ({ userData }) => {
     navigate("/");
   };
 
+  const handleComplaint = () => {};
+
   const [open, setOpen] = useState(true);
+  
   const Menus = [
     { title: "Dashboard", src: <LuLayoutDashboard className="h-8 w-7" /> },
-    { title: "Complaints", src: <LuInbox className="h-8 w-7" /> },
+
+    {
+      title: "Complaints",
+      src: <LuInbox className="h-8 w-7" />,
+      onClick: handleComplaint,
+    },
+    { title: "Complain History", src: <FaHistory  className="h-8 w-7" /> },
     { title: "Account Settings", src: <CgProfile className="h-8 w-7" /> },
     {
       title: "Settings",
@@ -75,7 +83,7 @@ const Sidebar = ({ userData }) => {
               <li
                 key={index}
                 className={`text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-amber-800 rounded-md ${
-                  menu.gap ? "mt-9" : "mt-2" 
+                  menu.gap ? "mt-9" : "mt-2"
                 }`}
                 onClick={menu.onClick}
               >

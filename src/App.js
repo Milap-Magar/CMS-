@@ -6,9 +6,10 @@ import UserRegister from "./auth/UserRegister";
 import Main from "./auth/Main";
 import UserLogin from "./auth/UserLogin";
 
-import Dashboard from "./components/Dashboard.component";
-
 import PrivateRoutes from "./private/PrivateRoutes";
+
+import Dashboard from "./components/Dashboard.component";
+import Complaint from "./components/Complaint.component";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
 
         <Route path="/user" element={<PrivateRoutes />}>
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="complaint" element={<Complaint />} />
         </Route>
 
         <Route path="/admin" element={<PrivateRoutes />}>
