@@ -4,11 +4,23 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Main = ({ userData, error }) => {
   useEffect(() => {
+    // Check if userData is available and if the toast has not been shown yet
     if (userData && userData.name) {
-      toast.dismiss();
-      toast.success(`Hi ${userData.name}! Welcome to the system.`, {
-        className: "custom-toast",
-      });
+      const toastShownKey = `toastShown_${userData.name}`;
+
+      // Check if the toast was already shown in this session
+      const toastShown = sessionStorage.getItem(toastShownKey);
+
+      if (!toastShown) {
+        // Show the toast
+        toast.dismiss();
+        toast.success(`Hi ${userData.name}! Welcome to the system.`, {
+          className: "custom-toast",
+        });
+
+        // Set the flag in session storage
+        sessionStorage.setItem(toastShownKey, "true");
+      }
     }
   }, [userData]);
 

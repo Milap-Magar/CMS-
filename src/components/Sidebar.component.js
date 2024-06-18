@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import logo from "../assets/pfp.jpg";
-import { FaArrowLeft, FaHistory  } from "react-icons/fa";
+import { FaArrowLeft, FaHistory } from "react-icons/fa";
 import { LuLayoutDashboard, LuInbox } from "react-icons/lu";
 import { IoSettingsOutline } from "react-icons/io5";
 import { CgProfile, CgLogOut } from "react-icons/cg";
@@ -20,19 +20,25 @@ const Sidebar = ({ userData }) => {
     navigate("/");
   };
 
-  const handleComplaint = () => {};
+  const navigateDashboard = () => navigate("/user/dashboard");
+
+  const handleComplaint = () => navigate("/user/complaint");
 
   const [open, setOpen] = useState(true);
-  
+
   const Menus = [
-    { title: "Dashboard", src: <LuLayoutDashboard className="h-8 w-7" /> },
+    {
+      title: "Dashboard",
+      src: <LuLayoutDashboard className="h-8 w-7" />,
+      onClick: navigateDashboard,
+    },
 
     {
       title: "Complaints",
       src: <LuInbox className="h-8 w-7" />,
       onClick: handleComplaint,
     },
-    { title: "Complain History", src: <FaHistory  className="h-8 w-7" /> },
+    { title: "Complain History", src: <FaHistory className="h-8 w-7" /> },
     { title: "Account Settings", src: <CgProfile className="h-8 w-7" /> },
     {
       title: "Settings",
@@ -76,7 +82,8 @@ const Sidebar = ({ userData }) => {
               !open && "scale-0"
             }`}
           >
-            {userData.name.charAt(0).toUpperCase() + userData.name.slice(1)}
+            {/* {userData.name.charAt(0).toUpperCase() + userData.name.slice(1)} */}
+            NAME
           </h2>
           <ul className="pt-6">
             {Menus.map((menu, index) => (

@@ -1,5 +1,9 @@
 import React from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
+
 import Sidebar from "./Sidebar.component";
+import ComplainModal from "./ComplainModal.component";
 
 const Complaint = () => {
   const [error, setError] = useState(null);
@@ -40,6 +44,7 @@ const Complaint = () => {
       ) : (
         <div className="flex bg-slate-200 h-screen w-full body">
           <Sidebar userData={userData} />
+          <ComplainModal />
         </div>
       )}
     </>
