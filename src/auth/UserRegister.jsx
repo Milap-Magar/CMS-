@@ -8,11 +8,12 @@ import Logo from "../assets/logo.png";
 function Register() {
   const [values, setValues] = useState({
     name: "",
+    DOB: "",
+    symbol: "",
     email: "",
     password: "",
-    phone: "",
     address: "",
-    symbol: "",
+    phone: "",
     program: "",
     semester: "",
   });
@@ -118,6 +119,57 @@ function Register() {
 
             <div className="mb-4">
               <label
+                htmlFor="dob"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Date of Birth
+              </label>
+              <input
+                id="dob"
+                name="dob"
+                type="date"
+                autoComplete="bday"
+                required
+                className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  errors.dob ? "border-red-500" : ""
+                }`}
+                placeholder="Enter your date of birth"
+                value={values.dob}
+                onChange={handleChange}
+              />
+              {errors.dob && (
+                <p className="text-red-500 text-xs italic">{errors.dob}</p>
+              )}
+            </div>
+
+            {/* done */}
+
+            <div className="mb-4">
+              <label
+                htmlFor="symbol"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Symbol No
+              </label>
+              <input
+                id="symbol"
+                name="symbol"
+                type="number"
+                required
+                className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  errors.symbol ? "border-red-500" : ""
+                }`}
+                placeholder="Enter your symbol number"
+                value={values.symbol}
+                onChange={handleChange}
+              />
+              {errors.symbol && (
+                <p className="text-red-500 text-xs italic">{errors.symbol}</p>
+              )}
+            </div>
+
+            <div className="mb-4">
+              <label
                 htmlFor="email"
                 className="block text-gray-700 text-sm font-bold mb-2"
               >
@@ -168,31 +220,6 @@ function Register() {
 
             <div className="mb-4">
               <label
-                htmlFor="phone"
-                className="block text-gray-700 text-sm font-bold mb-2"
-              >
-                Phone
-              </label>
-              <input
-                id="phone"
-                name="phone"
-                type="number"
-                autoComplete="tel"
-                required
-                className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                  errors.phone ? "border-red-500" : ""
-                }`}
-                placeholder="Enter your phone number"
-                value={values.phone}
-                onChange={handleChange}
-              />
-              {errors.phone && (
-                <p className="text-red-500 text-xs italic">{errors.phone}</p>
-              )}
-            </div>
-
-            <div className="mb-4">
-              <label
                 htmlFor="address"
                 className="block text-gray-700 text-sm font-bold mb-2"
               >
@@ -218,25 +245,26 @@ function Register() {
 
             <div className="mb-4">
               <label
-                htmlFor="symbol"
+                htmlFor="phone"
                 className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Symbol No
+                Phone
               </label>
               <input
-                id="symbol"
-                name="symbol"
+                id="phone"
+                name="phone"
                 type="number"
+                autoComplete="tel"
                 required
                 className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                  errors.symbol ? "border-red-500" : ""
+                  errors.phone ? "border-red-500" : ""
                 }`}
-                placeholder="Enter your symbol number"
-                value={values.symbol}
+                placeholder="Enter your phone number"
+                value={values.phone}
                 onChange={handleChange}
               />
-              {errors.symbol && (
-                <p className="text-red-500 text-xs italic">{errors.symbol}</p>
+              {errors.phone && (
+                <p className="text-red-500 text-xs italic">{errors.phone}</p>
               )}
             </div>
 
@@ -316,7 +344,7 @@ function Register() {
               >
                 Register
               </button>
-              <Link to={"/"}>
+              <Link to={"/user/login"}>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                   Log In
                 </button>

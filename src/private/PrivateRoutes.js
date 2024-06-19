@@ -16,7 +16,7 @@ const PrivateRoutes = () => {
 
       if (isValidToken) {
         userRole = decodedToken.role;
-        console.log("🚀 ~ PrivateRoutes ~ userRole:", userRole);
+        // console.log("🚀 ~ PrivateRoutes ~ userRole:", userRole);
       }
     } catch (error) {
       console.error("Failed to decode token:", error);

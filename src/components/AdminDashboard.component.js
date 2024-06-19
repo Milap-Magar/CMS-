@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "./Sidebar.component";
-import Main from "./Main.component";
+// import Sidebar from "./Sidebar.component";
+// import Main from "./Main.component";
 import axios from "axios";
 
-const Dashboard = () => {
+const AdminDashboard = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState(null);
@@ -18,7 +18,7 @@ const Dashboard = () => {
           return;
         }
 
-        const res = await axios.get("http://localhost:8080/user/dashboard", {
+        const res = await axios.get("http://localhost:8080/admin/dashboard", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -41,12 +41,13 @@ const Dashboard = () => {
         <div>Loading...</div>
       ) : (
         <div className="flex bg-slate-200 h-screen w-full body">
-          <Sidebar userData={userData} />
-          <Main userData={userData} error={error} />
+          <div>ee{userData.message}</div>
+          {/* <Sidebar userData={userData} />
+          <Main userData={userData} error={error} /> */}
         </div>
       )}
     </>
   );
 };
 
-export default Dashboard;
+export default AdminDashboard;

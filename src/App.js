@@ -8,7 +8,8 @@ import UserLogin from "./auth/UserLogin";
 
 import PrivateRoutes from "./private/PrivateRoutes";
 
-import Dashboard from "./components/Dashboard.component";
+import UserDashboard from "./components/UserDashboard.component";
+import AdminDashboard from "./components/AdminDashboard.component";
 import Complaint from "./components/Complaint.component";
 
 const App = () => {
@@ -21,12 +22,12 @@ const App = () => {
         <Route path="/admin/login" element={<AdminLogin />} />
 
         <Route path="/user" element={<PrivateRoutes />}>
-          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="dashboard" element={<UserDashboard />} />
           <Route path="complaint" element={<Complaint />} />
         </Route>
 
         <Route path="/admin" element={<PrivateRoutes />}>
-          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="dashboard" element={<AdminDashboard />} />
         </Route>
       </Routes>
     </Router>
