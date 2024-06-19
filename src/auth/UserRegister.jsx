@@ -15,7 +15,6 @@ function Register() {
     symbol: "",
     program: "",
     semester: "",
-    role: "isStudent",
   });
 
   const [errors, setErrors] = useState({});
@@ -116,6 +115,7 @@ function Register() {
                 <p className="text-red-500 text-xs italic">{errors.name}</p>
               )}
             </div>
+
             <div className="mb-4">
               <label
                 htmlFor="email"
@@ -140,6 +140,7 @@ function Register() {
                 <p className="text-red-500 text-xs italic">{errors.email}</p>
               )}
             </div>
+
             <div className="mb-4">
               <label
                 htmlFor="password"
@@ -164,6 +165,7 @@ function Register() {
                 <p className="text-red-500 text-xs italic">{errors.password}</p>
               )}
             </div>
+
             <div className="mb-4">
               <label
                 htmlFor="phone"
@@ -188,6 +190,7 @@ function Register() {
                 <p className="text-red-500 text-xs italic">{errors.phone}</p>
               )}
             </div>
+
             <div className="mb-4">
               <label
                 htmlFor="address"
@@ -212,6 +215,7 @@ function Register() {
                 <p className="text-red-500 text-xs italic">{errors.address}</p>
               )}
             </div>
+
             <div className="mb-4">
               <label
                 htmlFor="symbol"
@@ -235,6 +239,7 @@ function Register() {
                 <p className="text-red-500 text-xs italic">{errors.symbol}</p>
               )}
             </div>
+
             <div className="mb-4">
               <label
                 htmlFor="program"
@@ -269,6 +274,7 @@ function Register() {
                 <p className="text-red-500 text-xs italic">{errors.program}</p>
               )}
             </div>
+
             <div className="mb-4">
               <label
                 htmlFor="semester"
@@ -302,6 +308,7 @@ function Register() {
                 <p className="text-red-500 text-xs italic">{errors.semester}</p>
               )}
             </div>
+
             <div className="flex items-center justify-center gap-5">
               <button
                 type="submit"

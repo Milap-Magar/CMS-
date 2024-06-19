@@ -1,29 +1,43 @@
-import React from "react";
-import { Navigate, Outlet } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import React from "react";
+import { Navigate } from "react-router-dom";
 
 const PrivateRoutes = () => {
   const token = localStorage.getItem("Token");
-  // console.log("Retrieved token from localStorage:", token);
-
   let isValidToken = false;
+  let userRole = null;
+
   if (token) {
     try {
       const decodedToken = jwtDecode(token);
-      // console.log("Decoded token:", decodedToken);
       const currentTime = Date.now() / 1000;
+
       isValidToken = decodedToken.exp > currentTime;
-      // console.log("Token is valid:", isValidToken);
+
+      if (isValidToken) {
+        userRole = decodedToken.role;
+        console.log("🚀 ~ PrivateRoutes ~ userRole:", userRole);
+      }
     } catch (error) {
       console.error("Failed to decode token:", error);
-      alert("Failed to login", error);
+      alert("Failed to login. Please try again.");
     }
   } else {
     console.log("No token found, redirecting to login.");
   }
 
-  // console.log("Rendering PrivateRoutes with isValidToken:", isValidToken);
-  return isValidToken ? <Outlet /> : <Navigate to="/" />;
+  if (isValidToken) {
+    if (userRole === "student") {
+      return <Navigate to="/user/dashboard" />;
+    } else if (userRole === "admin" || userRole === "superadmin") {
+      return <Navigate to="/admin/dashboard" />;
+    } else {
+      console.log("Unknown role, redirecting to login.");
+      return <Navigate to="/" />;
+    }
+  } else {
+    return <Navigate to="/" />;
+  }
 };
 
 export default PrivateRoutes;

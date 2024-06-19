@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Image from "../assets/background.jpg";
 import Logo from "../assets/logo.png";
 import validate from "../validation/validation";
@@ -25,11 +25,12 @@ function AdminLogin() {
 
     if (Object.keys(validationErrors).length === 0) {
       axios
-        .post("http://localhost:8080/login", values)
+        .post("http://localhost:8080/admin/login", values)
+
         .then((res) => {
-          if (res.data.Token) {
-            localStorage.setItem("token", res.data.Token);
-            navigate("/user/dashboard");
+          if (res.data.login) {
+            localStorage.setItem("Token", res.data.token);
+            navigate("/admin/dashboard");
           } else {
             alert("No records");
           }
@@ -58,7 +59,7 @@ function AdminLogin() {
           <figure>
             <img
               src={Logo}
-              alt="logo image"
+              alt="logo"
               className="h-[30vh] w-[80vw] md:h-[35vh] md:w-[50vw]"
             />
           </figure>
@@ -90,6 +91,7 @@ function AdminLogin() {
                 <p className="text-red-500 text-xs italic">{errors.email}</p>
               )}
             </div>
+
             <div className="mb-6">
               <label
                 htmlFor="password"
@@ -114,6 +116,7 @@ function AdminLogin() {
                 <p className="text-red-500 text-xs italic">{errors.password}</p>
               )}
             </div>
+
             <div className="flex items-center justify-center gap-5">
               <button
                 type="submit"
@@ -121,11 +124,6 @@ function AdminLogin() {
               >
                 Log In
               </button>
-              <Link to={"/user/register"}>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                  Register
-                </button>
-              </Link>
             </div>
           </form>
         </div>
