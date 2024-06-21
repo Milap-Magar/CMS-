@@ -1,4 +1,4 @@
-const reg_validation = (values) => {
+const  reg_validation = (values) => {
   const errors = {};
 
   if (!values.name) {

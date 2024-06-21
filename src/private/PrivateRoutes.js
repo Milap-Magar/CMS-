@@ -1,6 +1,7 @@
 import { jwtDecode } from "jwt-decode";
 import React from "react";
 import { Navigate } from "react-router-dom";
+import AdminDashboard from "../components/admin/AdminDashboard.component";
 
 const PrivateRoutes = () => {
   const token = localStorage.getItem("Token");
@@ -32,7 +33,7 @@ const PrivateRoutes = () => {
     } else if (userRole === "admin" || userRole === "superadmin") {
       return <Navigate to="/admin/dashboard" />;
     } else {
-      console.log("Unknown role, redirecting to login.");
+      alert("Unknown role, redirecting to login.");
       return <Navigate to="/" />;
     }
   } else {

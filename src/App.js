@@ -8,9 +8,9 @@ import UserLogin from "./auth/UserLogin";
 
 import PrivateRoutes from "./private/PrivateRoutes";
 
-import UserDashboard from "./components/UserDashboard.component";
-import AdminDashboard from "./components/AdminDashboard.component";
-import Complaint from "./components/Complaint.component";
+import UserDashboard from "./components/user/UserDashboard.component";
+import AdminDashboard from "./components/admin/AdminDashboard.component";
+import Complaint from "./components/user/Complaint.component";
 
 const App = () => {
   return (
@@ -26,8 +26,8 @@ const App = () => {
           <Route path="complaint" element={<Complaint />} />
         </Route>
 
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin" element={<PrivateRoutes />}>
-          <Route path="dashboard" element={<AdminDashboard />} />
         </Route>
       </Routes>
     </Router>

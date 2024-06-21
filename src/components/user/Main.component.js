@@ -4,7 +4,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Main = ({ userData, error }) => {
   useEffect(() => {
-    // Check if userData is available and if the toast has not been shown yet
     if (userData && userData.name) {
       const toastShownKey = `toastShown_${userData.name}`;
 

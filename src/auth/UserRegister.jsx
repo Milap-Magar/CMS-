@@ -33,7 +33,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = reg_validation(values);
-    console.log("🚀 ~ handleSubmit ~ values:", values);
+    // console.log("🚀 ~ handleSubmit ~ values:", values);
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
@@ -91,7 +91,6 @@ function Register() {
             Student Registration Form
           </h2>
           <form onSubmit={handleSubmit}>
-            {/* Form fields go here, unchanged */}
             <div className="mb-4">
               <label
                 htmlFor="name"
@@ -141,8 +140,6 @@ function Register() {
                 <p className="text-red-500 text-xs italic">{errors.dob}</p>
               )}
             </div>
-
-            {/* done */}
 
             <div className="mb-4">
               <label

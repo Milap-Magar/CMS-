@@ -57,7 +57,7 @@ const Main = () => {
 
         {/* list bar */}
         <ul
-          className={`flex flex-col sm:flex sm:flex-col md:flex md:flex-row gap-2 items-center text-black md:text-sm sm:text-sm text-xs`}
+          className={`flex flex-col sm:flex sm:flex-col md:flex md:flex-row gap-2 items-center text-black lg:text-lg md:text-md sm:text-sm text-xs`}
         >
           <li>
             <Link

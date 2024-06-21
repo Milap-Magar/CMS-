@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../assets/pfp.jpg";
+import logo from "../../assets/pfp.jpg";
 import { FaArrowLeft, FaHistory } from "react-icons/fa";
 import { LuLayoutDashboard, LuInbox } from "react-icons/lu";
 import { IoSettingsOutline } from "react-icons/io5";
