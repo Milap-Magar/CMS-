@@ -69,9 +69,7 @@ const Dashboard = () => {
             />
           </div>
           <div className="flex flex-col md:flex-row flex-grow w-full relative">
-            {/* ASIDE SECTION */}
             <Aside isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-            {/* MAIN SECTION */}
             <Main />
           </div>
         </div>
