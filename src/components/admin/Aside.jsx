@@ -1,11 +1,13 @@
 import React from "react";
 
-import { FaBars, FaTimes, FaRegFileAlt } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { IoSettingsOutline, IoLogOutOutline } from "react-icons/io5";
 import { GrUserAdmin } from "react-icons/gr";
 import Button from "./Button";
 import { Link, useNavigate } from "react-router-dom";
+
+import Accordion from "./Accordian.component";
 
 const Aside = ({ isMenuOpen, setIsMenuOpen }) => {
   const navigate = useNavigate();
@@ -33,10 +35,7 @@ const Aside = ({ isMenuOpen, setIsMenuOpen }) => {
         </Link>
 
         <Link>
-          <li className="hover:bg-slate-300 p-2 rounded-lg cursor-pointer flex gap-1">
-            <FaRegFileAlt className="w-6 h-5" />
-            Complaints
-          </li>
+          <Accordion />
         </Link>
 
         <Link>
