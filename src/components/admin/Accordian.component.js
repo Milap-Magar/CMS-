@@ -13,7 +13,7 @@ const Accordion = () => {
     <div className="w-full max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden">
       <div
         onClick={toggleAccordion}
-        className="cursor-pointer flex items-center p-4 hover:bg-slate-300 transition-colors duration-200"
+        className="cursor-pointer flex items-center p-5 hover:bg-slate-300 transition-colors duration-200"
       >
         <FaRegFileAlt className="w-6 h-5" />
         <span className="ml-2 text-lg">Complaints</span>
@@ -21,9 +21,7 @@ const Accordion = () => {
           className={`ml-auto transform transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""
           }`}
-          width="20"
-          height="20"
-          viewBox="0 0 20 20"
+          width="20" height="20" viewBox="0 0 20 20"
           fill="currentColor"
         >
           <path
@@ -35,22 +33,22 @@ const Accordion = () => {
       </div>
 
       {isOpen && (
-        <div className="bg-gray-100 p-4">
+        <div className="bg-gray-100 p-3 rounded-xl absolute">
           <Link
             to="#"
-            className="block text-gray-700 py-2 hover:bg-gray-200 rounded"
+            className="block text-gray-700 py-2 px-4 hover:bg-gray-200 rounded"
           >
             View Complaints
           </Link>
           <Link
             to="#"
-            className="block text-gray-700 py-2 hover:bg-gray-200 rounded"
+            className="block text-gray-700 py-2 px-4 hover:bg-gray-200 rounded"
           >
             File a Complaint
           </Link>
           <Link
             to="#"
-            className="block text-gray-700 py-2 hover:bg-gray-200 rounded"
+            className="block text-gray-700 py-2 px-4 hover:bg-gray-200 rounded"
           >
             Complaint History
           </Link>

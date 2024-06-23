@@ -1,12 +1,11 @@
 import { jwtDecode } from "jwt-decode";
 import React from "react";
 import { Navigate } from "react-router-dom";
-import AdminDashboard from "../components/admin/AdminDashboard.component";
 
 const PrivateRoutes = () => {
   const token = localStorage.getItem("Token");
   let isValidToken = false;
-  let userRole = null;
+  const userRole = null;
 
   if (token) {
     try {
@@ -17,7 +16,6 @@ const PrivateRoutes = () => {
 
       if (isValidToken) {
         userRole = decodedToken.role;
-        // console.log("🚀 ~ PrivateRoutes ~ userRole:", userRole);
       }
     } catch (error) {
       console.error("Failed to decode token:", error);
@@ -28,14 +26,7 @@ const PrivateRoutes = () => {
   }
 
   if (isValidToken) {
-    if (userRole === "student") {
-      return <Navigate to="/user/dashboard" />;
-    } else if (userRole === "admin" || userRole === "superadmin") {
-      return <Navigate to="/admin/dashboard" />;
-    } else {
-      alert("Unknown role, redirecting to login.");
-      return <Navigate to="/" />;
-    }
+    return <Navigate to="/user/dashboard" />;
   } else {
     return <Navigate to="/" />;
   }

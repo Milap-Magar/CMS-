@@ -31,7 +31,7 @@ function UserLogin() {
             localStorage.setItem("Token", res.data.token);
             navigate("/user/dashboard");
           } else {
-            alert("No records");
+            alert("No records")
           }
         })
         .catch((err) => {

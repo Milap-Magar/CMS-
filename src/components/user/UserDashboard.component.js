@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "./Sidebar.component";
 import Main from "./Main.component";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const UserDashboard = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -15,6 +18,7 @@ const UserDashboard = () => {
 
         if (!token) {
           setError("No token found");
+          navigate("/");
           return;
         }
 

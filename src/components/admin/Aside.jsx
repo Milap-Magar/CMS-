@@ -33,11 +33,9 @@ const Aside = ({ isMenuOpen, setIsMenuOpen }) => {
             Dashboard
           </li>
         </Link>
-
-        <Link>
+        <div>
           <Accordion />
-        </Link>
-
+        </div>
         <Link>
           <li className="hover:bg-slate-300 p-2 rounded-lg cursor-pointer flex gap-1">
             <GrUserAdmin className="w-6 h-5" />

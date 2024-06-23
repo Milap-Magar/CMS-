@@ -26,6 +26,7 @@ const Dashboard = () => {
         if (!token) {
           setError("No token found");
           setLoading(false);
+          navigate("/");
           return;
         }
 

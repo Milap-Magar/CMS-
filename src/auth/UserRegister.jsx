@@ -12,10 +12,11 @@ function Register() {
     symbol: "",
     email: "",
     password: "",
-    address: "",
     phone: "",
+    address: "",
     program: "",
     semester: "",
+    role: "student",
   });
 
   const [errors, setErrors] = useState({});
@@ -125,7 +126,7 @@ function Register() {
               </label>
               <input
                 id="dob"
-                name="dob"
+                name="dob" // Ensure the name attribute matches the state key 'dob'
                 type="date"
                 autoComplete="bday"
                 required
@@ -133,7 +134,7 @@ function Register() {
                   errors.dob ? "border-red-500" : ""
                 }`}
                 placeholder="Enter your date of birth"
-                value={values.dob}
+                value={values.dob} // Ensure the state key is 'dob' (not 'DOB')
                 onChange={handleChange}
               />
               {errors.dob && (
@@ -151,7 +152,7 @@ function Register() {
               <input
                 id="symbol"
                 name="symbol"
-                type="number"
+                type="int"
                 required
                 className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                   errors.symbol ? "border-red-500" : ""
@@ -217,31 +218,6 @@ function Register() {
 
             <div className="mb-4">
               <label
-                htmlFor="address"
-                className="block text-gray-700 text-sm font-bold mb-2"
-              >
-                Address
-              </label>
-              <input
-                id="address"
-                name="address"
-                type="text"
-                autoComplete="address"
-                required
-                className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
-                  errors.address ? "border-red-500" : ""
-                }`}
-                placeholder="Enter your address"
-                value={values.address}
-                onChange={handleChange}
-              />
-              {errors.address && (
-                <p className="text-red-500 text-xs italic">{errors.address}</p>
-              )}
-            </div>
-
-            <div className="mb-4">
-              <label
                 htmlFor="phone"
                 className="block text-gray-700 text-sm font-bold mb-2"
               >
@@ -262,6 +238,31 @@ function Register() {
               />
               {errors.phone && (
                 <p className="text-red-500 text-xs italic">{errors.phone}</p>
+              )}
+            </div>
+
+            <div className="mb-4">
+              <label
+                htmlFor="address"
+                className="block text-gray-700 text-sm font-bold mb-2"
+              >
+                Address
+              </label>
+              <input
+                id="address"
+                name="address"
+                type="text"
+                autoComplete="address"
+                required
+                className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  errors.address ? "border-red-500" : ""
+                }`}
+                placeholder="Enter your address"
+                value={values.address}
+                onChange={handleChange}
+              />
+              {errors.address && (
+                <p className="text-red-500 text-xs italic">{errors.address}</p>
               )}
             </div>
 
