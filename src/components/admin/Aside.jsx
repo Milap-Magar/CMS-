@@ -55,7 +55,7 @@ const Aside = ({ isMenuOpen, setIsMenuOpen }) => {
             }`}
           >
             <GrUserAdmin className="w-6 h-5" />
-            Sub-Admin
+            Add-Admin
           </li>
         </Link>
         <Link

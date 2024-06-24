@@ -4,7 +4,7 @@ import axios from "axios";
 import Button from "../components/admin/Button";
 import Headers from "../components/admin/Headers.component";
 
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaFileSignature } from "react-icons/fa";
 import Aside from "../components/admin/Aside";
 
 const SubAdmin = () => {
@@ -119,10 +119,14 @@ const SubAdmin = () => {
           <Aside isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
           <form
             onSubmit={handleSubmit}
-            className="w-[75vw] sm:w-[60vw] md:w-[50vw] h-auto bg-slate-200 px-10 py-1 pt-7
+            className="w-[75vw] sm:w-[60vw] md:w-[50vw] h-auto bg-slate-200 px-10 py-2
             flex flex-col justify-center absolute top-0 left-8 sm:left-36 md:left-96  rounded-xl
             shadow-xl shadow-slate-700"
           >
+            <div className="flex pb-4">
+              <FaFileSignature className="h-5 w-5" />
+              <span>Add Admin:</span>
+            </div>
             <div className="mb-4">
               <label
                 htmlFor="email"
@@ -142,7 +146,9 @@ const SubAdmin = () => {
                 required
               />
               {formErrors.email && (
-                <p className="text-red-500 text-xs mt-1 p-1">{formErrors.email}</p>
+                <p className="text-red-500 text-xs mt-1 p-1">
+                  {formErrors.email}
+                </p>
               )}
             </div>
             <div className="mb-4">
@@ -188,7 +194,9 @@ const SubAdmin = () => {
                 required
               />
               {formErrors.name && (
-                <p className="text-red-500 text-xs mt-1 p-1">{formErrors.name}</p>
+                <p className="text-red-500 text-xs mt-1 p-1">
+                  {formErrors.name}
+                </p>
               )}
             </div>
             <div className="mb-4">
@@ -210,7 +218,9 @@ const SubAdmin = () => {
                 required
               />
               {formErrors.phone && (
-                <p className="text-red-500 text-xs mt-1 p-1">{formErrors.phone}</p>
+                <p className="text-red-500 text-xs mt-1 p-1">
+                  {formErrors.phone}
+                </p>
               )}
             </div>
             <div className="mb-4">
