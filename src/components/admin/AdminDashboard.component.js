@@ -7,7 +7,7 @@ import { FaBars } from "react-icons/fa";
 
 import Button from "./Button";
 import Aside from "./Aside";
-import Main from "./Main.component";
+import Main from "../../pages/Main.page";
 import Headers from "./Headers.component";
 
 const Dashboard = () => {

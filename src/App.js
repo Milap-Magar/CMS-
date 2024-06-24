@@ -11,6 +11,7 @@ import PrivateRoutes from "./private/PrivateRoutes";
 import UserDashboard from "./components/user/UserDashboard.component";
 import AdminDashboard from "./components/admin/AdminDashboard.component";
 import Complaint from "./components/user/Complaint.component";
+import View from "./pages/View.component";
 
 const App = () => {
   return (
@@ -22,11 +23,12 @@ const App = () => {
         <Route path="/admin/login" element={<AdminLogin />} />
 
         {/* User Routes */}
-        <Route path="dashboard" element={<UserDashboard />} />
-        <Route path="complaint" element={<Complaint />} />
+        <Route path="/user/dashboard" element={<UserDashboard />} />
+        <Route path="/user/complaint" element={<Complaint />} />
 
         {/* Admin Routes  */}
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/handlecomplaint" element={<View />} />
       </Routes>
     </Router>
   );

@@ -12,11 +12,7 @@ const Sidebar = ({ userData }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Remove token from localStorage
     localStorage.removeItem("Token");
-    // axios.defaults.headers.common["Authorization"] = null;
-
-    // window.location.href = "/login";
     navigate("/");
   };
 

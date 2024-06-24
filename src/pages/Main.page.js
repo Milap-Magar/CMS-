@@ -12,7 +12,6 @@ const Main = () => {
       <div className="flex-grow mt-7 mx-5 overflow-y-auto font-raleway">
         <div className="p-4 border bg-slate-200 rounded-2xl shadow-lg shadow-slate-500">
           <h2 className="text-xl font-semibold mb-4">Recent Complaints:</h2>
-          {/* Sample recent items */}
           <div className="space-y-4">
             <div className="p-4 bg-slate-100 rounded-md shadow">
               Recent Item 1

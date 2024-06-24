@@ -21,7 +21,9 @@ const Accordion = () => {
           className={`ml-auto transform transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""
           }`}
-          width="20" height="20" viewBox="0 0 20 20"
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
           fill="currentColor"
         >
           <path
@@ -35,16 +37,10 @@ const Accordion = () => {
       {isOpen && (
         <div className="bg-gray-100 p-3 rounded-xl absolute">
           <Link
-            to="#"
+            to="/admin/handlecomplaint"
             className="block text-gray-700 py-2 px-4 hover:bg-gray-200 rounded"
           >
             View Complaints
-          </Link>
-          <Link
-            to="#"
-            className="block text-gray-700 py-2 px-4 hover:bg-gray-200 rounded"
-          >
-            File a Complaint
           </Link>
           <Link
             to="#"

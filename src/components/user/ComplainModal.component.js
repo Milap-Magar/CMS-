@@ -1,26 +1,32 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { IoIosArrowForward } from "react-icons/io";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
-const ComplainModal = ({ userData }) => {
+const ComplainModal = ({data}) => {
+  // console.log("🚀 ~ ComplainModal ~ data:", data);
+
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
-    email: "",
+    email: data?.email || "",
     title: "",
     description: "",
     category: "",
-    student_id: userData?.sid || "",
-    complain: "",
+    student_id: data?.sid || "",
+    complain_to: "admin",
   });
 
   useEffect(() => {
-    if (userData?.email) {
+    if (data?.email) {
       setFormData((prevFormData) => ({
         ...prevFormData,
-        email: userData.email,
+        email: data.email,
       }));
     }
-  }, [userData]);
+  }, [data]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,27 +39,48 @@ const ComplainModal = ({ userData }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await fetch("http://localhost:8080/complaints", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+    console.log("Submitting form data:", formData);
 
-      if (response.ok) {
+    const sanitizedData = { ...formData };
+    Object.keys(sanitizedData).forEach((key) => {
+      if (sanitizedData[key] === undefined) {
+        sanitizedData[key] = null;
+      }
+    });
+
+    try {
+      const token = localStorage.getItem("Token");
+
+      if (!token) {
+        console.log("Token not found, redirecting to login.");
+        navigate("/");
+        return;
+      }
+
+      const response = await axios.post(
+        "http://localhost:8080/complaints",
+        sanitizedData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status === 200) {
         toast.success("Complaint submitted successfully!", {
           className: "custom-toast",
         });
 
+        // Reset the form data after successful submission
         setFormData({
-          email: userData?.email || "",
+          email: data?.email || "",
           title: "",
           description: "",
           category: "",
-          student_id: userData?.sid || "",
-          complain_to: "",
+          student_id: data?.sid || "",
+          complain_to: "admin",
         });
       } else {
         toast.error("Failed to submit complaint.", {
@@ -61,9 +88,27 @@ const ComplainModal = ({ userData }) => {
         });
       }
     } catch (error) {
-      toast.error("An error occurred while submitting the complaint.", {
-        className: "custom-toast",
-      });
+      if (error.response) {
+        console.error("Error response:", error.response);
+        toast.error(
+          `Failed to submit complaint: ${
+            error.response.data.message || "Server error"
+          }`,
+          {
+            className: "custom-toast",
+          }
+        );
+      } else if (error.request) {
+        console.error("Error request:", error.request);
+        toast.error("No response received from the server.", {
+          className: "custom-toast",
+        });
+      } else {
+        console.error("Error message:", error.message);
+        toast.error("An error occurred while submitting the complaint.", {
+          className: "custom-toast",
+        });
+      }
     }
   };
 
@@ -111,9 +156,9 @@ const ComplainModal = ({ userData }) => {
                   Complain To <small>(Eg: Administration)</small>
                 </label>
                 <select
-                  name="complain"
+                  name="complain_to" // Updated to complain_to
                   id="complain"
-                  value={formData.complain}
+                  value={formData.complain_to} // Updated to formData.complain_to
                   onChange={handleChange}
                   required
                   className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500"

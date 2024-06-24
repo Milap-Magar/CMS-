@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 const PrivateRoutes = () => {
   const token = localStorage.getItem("Token");
   let isValidToken = false;
-  const userRole = null;
+  let userRole = null;
 
   if (token) {
     try {
