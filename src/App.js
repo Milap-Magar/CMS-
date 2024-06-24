@@ -6,12 +6,13 @@ import UserRegister from "./auth/UserRegister";
 import Main from "./auth/Main";
 import UserLogin from "./auth/UserLogin";
 
-import PrivateRoutes from "./private/PrivateRoutes";
+// import PrivateRoutes from "./private/PrivateRoutes";
 
 import UserDashboard from "./components/user/UserDashboard.component";
 import AdminDashboard from "./components/admin/AdminDashboard.component";
 import Complaint from "./components/user/Complaint.component";
-import View from "./pages/View.component";
+import View from "./pages/View.page";
+import ComplaintHistory from "./pages/ComplainHistory.page";
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         {/* Admin Routes  */}
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/handlecomplaint" element={<View />} />
+        <Route path="/admin/complainhistory" element={<ComplaintHistory />} />
       </Routes>
     </Router>
   );

@@ -42,7 +42,7 @@ const Aside = ({ isMenuOpen, setIsMenuOpen }) => {
             Dashboard
           </li>
         </Link>
-        <div onClick={() => setActiveLink("/admin/handlecomplaint")}>
+        <div>
           <Accordion />
         </div>
         <Link

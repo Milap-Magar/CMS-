@@ -43,7 +43,7 @@ const Accordion = () => {
             View Complaints
           </Link>
           <Link
-            to="#"
+            to="/admin/complainhistory"
             className="block text-gray-700 py-2 px-4 hover:bg-gray-200 rounded"
           >
             Complaint History
