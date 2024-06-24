@@ -13,6 +13,7 @@ import AdminDashboard from "./components/admin/AdminDashboard.component";
 import Complaint from "./components/user/Complaint.component";
 import View from "./pages/View.page";
 import ComplaintHistory from "./pages/ComplainHistory.page";
+import SubAdmin from "./pages/SubAdmin.page";
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/handlecomplaint" element={<View />} />
         <Route path="/admin/complainhistory" element={<ComplaintHistory />} />
+        <Route path="/admin/sub-admin" element={<SubAdmin />} />
       </Routes>
     </Router>
   );
