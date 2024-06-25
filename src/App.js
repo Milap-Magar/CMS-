@@ -14,6 +14,7 @@ import Complaint from "./components/user/Complaint.component";
 import View from "./pages/View.page";
 import ComplaintHistory from "./pages/ComplainHistory.page";
 import SubAdmin from "./pages/SubAdmin.page";
+import Total from "./pages/Total.page";
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
         <Route path="/admin/handlecomplaint" element={<View />} />
         <Route path="/admin/complainhistory" element={<ComplaintHistory />} />
         <Route path="/admin/sub-admin" element={<SubAdmin />} />
+        <Route path="/admin/total" element={<Total />} />
       </Routes>
     </Router>
   );

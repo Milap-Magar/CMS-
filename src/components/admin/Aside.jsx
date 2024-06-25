@@ -59,10 +59,7 @@ const Aside = ({ isMenuOpen, setIsMenuOpen }) => {
             Add-Admin
           </li>
         </Link>
-        <Link
-          to="/admin/sub-admin"
-          onClick={() => setActiveLink("/admin/sub-admin")}
-        >
+        <Link to="/admin/total" onClick={() => setActiveLink("/admin/total")}>
           <li
             className={`hover:bg-slate-300 p-2 rounded-lg cursor-pointer flex gap-1 ${
               activeLink === "/admin/total" ? "bg-slate-400" : ""
