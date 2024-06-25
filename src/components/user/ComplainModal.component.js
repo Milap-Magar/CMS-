@@ -5,7 +5,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
-const ComplainModal = ({data}) => {
+const ComplainModal = ({ data }) => {
   // console.log("🚀 ~ ComplainModal ~ data:", data);
 
   const navigate = useNavigate();
@@ -39,7 +39,7 @@ const ComplainModal = ({data}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Submitting form data:", formData);
+    // console.log("Submitting form data:", formData);
 
     const sanitizedData = { ...formData };
     Object.keys(sanitizedData).forEach((key) => {
@@ -68,7 +68,7 @@ const ComplainModal = ({data}) => {
         }
       );
 
-      if (response.status === 200) {
+      if (response.status == 200) {
         toast.success("Complaint submitted successfully!", {
           className: "custom-toast",
         });
@@ -89,7 +89,7 @@ const ComplainModal = ({data}) => {
       }
     } catch (error) {
       if (error.response) {
-        console.error("Error response:", error.response);
+        // console.error("Error response:", error.response);
         toast.error(
           `Failed to submit complaint: ${
             error.response.data.message || "Server error"
@@ -99,7 +99,7 @@ const ComplainModal = ({data}) => {
           }
         );
       } else if (error.request) {
-        console.error("Error request:", error.request);
+        // console.error("Error request:", error.request);
         toast.error("No response received from the server.", {
           className: "custom-toast",
         });
@@ -115,15 +115,15 @@ const ComplainModal = ({data}) => {
   return (
     <>
       <ToastContainer limit={1} toastClassName="custom-toast-container" />
-      <div className="min-h-screen w-full flex flex-col items-start justify-center bg-amber-100">
-        <div className="flex pb-10 px-5">
+      <div className="min-h-screen w-full flex flex-col items-start justify-center bg-amber-100 overflow-hidden">
+        <div className="flex py-4 px-5">
           <IoIosArrowForward className="h-7 w-8" />
           <span className="text-xl font-mono">Register Complaint</span>
         </div>
         <div className="w-full">
           <form
             onSubmit={handleSubmit}
-            className="bg-white p-8 rounded-lg shadow-lg shadow-amber-400 w-full max-w-4xl mx-auto"
+            className="bg-white p-6 rounded-lg shadow-lg shadow-amber-400 w-full max-w-4xl mx-auto"
           >
             <h2 className="text-2xl font-semibold text-center text-amber-700 mb-6">
               Submit a Complaint

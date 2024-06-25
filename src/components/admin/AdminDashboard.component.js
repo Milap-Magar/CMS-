@@ -54,7 +54,7 @@ const Dashboard = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="bg-white overflow-x-hidden min-h-screen flex flex-col">
+    <div className="bg-white overflow-x-hidden min-h-screen flex flex-col overflow-hidden">
       {userData ? (
         <div className="flex-grow flex flex-col items-center font-raleway px-5 py-2">
           <div className="flex flex-col justify-center items-center mb-4">

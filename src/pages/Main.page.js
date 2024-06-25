@@ -4,7 +4,7 @@ import ComplaintsChart from "./ComplainChart.page";
 
 const Main = () => {
   return (
-    <div className="w-full md:w-[75vw] flex flex-col flex-grow overflow-auto">
+    <div className="w-full md:w-[75vw] flex flex-col flex-grow ">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 h-[580px] sm:h-[20vh] md:h-[30vh] px-6">
         <div className="bg-slate-200 shadow-lg shadow-slate-500 rounded-2xl h-[100px] md:h-[200px]">
           {" "}

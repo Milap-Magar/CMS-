@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+
 import logo from "../../assets/pfp.jpg";
 import { FaArrowLeft, FaHistory } from "react-icons/fa";
 import { LuLayoutDashboard, LuInbox } from "react-icons/lu";
-import { IoSettingsOutline } from "react-icons/io5";
 import { CgProfile, CgLogOut } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 
@@ -36,11 +36,6 @@ const Sidebar = ({ userData }) => {
     },
     { title: "Complain History", src: <FaHistory className="h-8 w-7" /> },
     { title: "Account Settings", src: <CgProfile className="h-8 w-7" /> },
-    {
-      title: "Settings",
-      src: <IoSettingsOutline className="h-8 w-7" />,
-      gap: true,
-    },
     {
       title: "Logout",
       src: <CgLogOut className="h-8 w-7" />,
