@@ -24,12 +24,16 @@ const Aside = ({ isMenuOpen, setIsMenuOpen }) => {
     <aside
       className={`${
         isMenuOpen ? "block" : "hidden"
-      } md:block absolute md:static top-0 left-0 w-full md:w-[20vw] bg-slate-200 shadow-2xl shadow-slate-500 rounded-3xl p-6 md:p-0 md:h-[75vh] z-10`}
+      } md:block absolute md:static top-0 left-0 w-full md:w-[20vw] bg-slate-300 shadow-2xl shadow-slate-500 rounded-3xl md:p-0 h-[75vh] md:h-[85vh] z-10`}
     >
-      <span className="font-raleway font-semibold text-2xl sm:text-2xl md:text-md lg:text-lg absolute md:top-1 md:left-14 sm:top-6 sm:left-48 top-8 left-24">
+      <span
+        className={`${
+          isMenuOpen ? "hidden" : "block"
+        } font-raleway font-semibold text-2xl sm:text-sm md:text-md lg:text-lg absolute md:top-1 md:left-12 sm:top-6 sm:left-48 top-8 left-24`}
+      >
         <u>Admin</u> <u>Dashboard</u>{" "}
       </span>
-      <ul className="flex flex-col justify-between items-center gap-6 md:gap-5 py-12 ">
+      <ul className="flex flex-col justify-between items-center gap-10 md:gap-5 py-12 ">
         <Link
           to="/admin/dashboard"
           onClick={() => setActiveLink("/admin/dashboard")}

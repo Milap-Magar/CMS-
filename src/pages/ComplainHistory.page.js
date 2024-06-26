@@ -37,7 +37,6 @@ const ComplaintHistory = () => {
         );
 
         if (response.data.success) {
-          // Sort complaints by created_at in descending order
           const sortedComplaints = response.data.complaints.sort(
             (a, b) => new Date(b.created_at) - new Date(a.created_at)
           );

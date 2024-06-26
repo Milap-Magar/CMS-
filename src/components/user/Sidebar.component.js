@@ -20,6 +20,8 @@ const Sidebar = ({ userData }) => {
 
   const handleComplaint = () => navigate("/user/complaint");
 
+  const handleDetails = () => navigate("/user/complaintdetails");
+
   const [open, setOpen] = useState(true);
 
   const Menus = [
@@ -34,7 +36,11 @@ const Sidebar = ({ userData }) => {
       src: <LuInbox className="h-8 w-7" />,
       onClick: handleComplaint,
     },
-    { title: "Complain History", src: <FaHistory className="h-8 w-7" /> },
+    {
+      title: "Complain History",
+      src: <FaHistory className="h-8 w-7" />,
+      onClick: handleDetails,
+    },
     { title: "Account Settings", src: <CgProfile className="h-8 w-7" /> },
     {
       title: "Logout",

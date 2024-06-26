@@ -10,7 +10,7 @@ const Complaint = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState("");
-  console.log(userData);
+  // console.log(userData);
 
   const navigate = useNavigate();
 

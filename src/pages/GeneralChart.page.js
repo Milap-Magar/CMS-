@@ -11,7 +11,6 @@ import {
 } from "chart.js";
 import axios from "axios";
 
-// Register chart components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -46,19 +45,8 @@ const ComplaintsChart = () => {
 
         if (response.data.success) {
           const complaints = response.data.complaints;
-          const categories = ["Technical", "Non-Technical"];
-          const statusCounts = {
-            pending: 0,
-            resolved: 0,
-          };
-
-          complaints.forEach((complaint) => {
-            if (complaint.status === "pending") {
-              statusCounts.pending += 1;
-            } else if (complaint.status === "resolved") {
-              statusCounts.resolved += 1;
-            }
-          });
+          console.log("🚀 ~ fetchComplaintsData ~ complaints:", complaints);
+          const categories = ["General", "Admin", "Accounts", "Other"];
 
           setChartData({
             labels: categories,
@@ -67,11 +55,18 @@ const ComplaintsChart = () => {
                 label: "Pending Complaints",
                 data: [
                   complaints.filter(
-                    (c) => c.category === "Technical" && c.status === "pending"
+                    (c) =>
+                      c.complain_to === "Accounts & Billing" &&
+                      c.status === "pending"
                   ).length,
                   complaints.filter(
-                    (c) =>
-                      c.category === "Non-Technical" && c.status === "pending"
+                    (c) => c.complain_to === "admin" && c.status === "pending"
+                  ).length,
+                  complaints.filter(
+                    (c) => c.complain_to === "Other" && c.status === "pending"
+                  ).length,
+                  complaints.filter(
+                    (c) => c.complain_to === "General" && c.status === "pending"
                   ).length,
                 ],
                 backgroundColor: "rgba(255, 99, 132, 0.2)",
@@ -82,11 +77,19 @@ const ComplaintsChart = () => {
                 label: "Resolved Complaints",
                 data: [
                   complaints.filter(
-                    (c) => c.category === "Technical" && c.status === "resolved"
+                    (c) =>
+                      c.complain_to === "Accounts & Billing" &&
+                      c.status === "resolved"
+                  ).length,
+                  complaints.filter(
+                    (c) => c.complain_to === "Admin" && c.status === "resolved"
+                  ).length,
+                  complaints.filter(
+                    (c) => c.complain_to === "Other" && c.status === "resolved"
                   ).length,
                   complaints.filter(
                     (c) =>
-                      c.category === "Non-Technical" && c.status === "resolved"
+                      c.complain_to === "General" && c.status === "resolved"
                   ).length,
                 ],
                 backgroundColor: "rgba(54, 162, 235, 0.2)",
@@ -113,7 +116,7 @@ const ComplaintsChart = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="relative w-full h-auto p-4 rounded-2xl shadow-lg shadow-slate-500 overflow-hidden">
+    <div className="w-full h-auto p-4 rounded-2xl shadow-lg shadow-slate-500 relative overflow-auto">
       <style>
         {`
           .gradient-background {
@@ -133,10 +136,10 @@ const ComplaintsChart = () => {
       <div className="gradient-background absolute inset-0 z-0"></div>
       <div className="relative z-10">
         <h2 className="text-lg font-semibold mb-4 text-white">
-          Complaints Overview
+          Complaints Based on:
         </h2>
         {chartData ? (
-          <div className="h-[100px] md:h-[200px]">
+          <div className="h-[200px] md:h-[200px]">
             <Bar
               data={chartData}
               options={{

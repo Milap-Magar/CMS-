@@ -104,9 +104,6 @@ const Total = () => {
                     <th className="text-left p-2 border-[2px] border-slate-700">
                       Semester
                     </th>
-                    <th className="text-left p-2 border-[2px] border-slate-700">
-                      Filed On
-                    </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -135,9 +132,6 @@ const Total = () => {
                       </td>
                       <td className="p-2 border-[2px] border-slate-400">
                         {total.semester}
-                      </td>
-                      <td className="p-2 border-[2px] border-slate-400">
-                        {new Date(total.created_at).toLocaleString()}
                       </td>
                     </tr>
                   ))}

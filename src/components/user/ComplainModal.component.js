@@ -16,7 +16,7 @@ const ComplainModal = ({ data }) => {
     description: "",
     category: "",
     student_id: data?.sid || "",
-    complain_to: "admin",
+    complain_to: "",
   });
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const ComplainModal = ({ data }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // console.log("Submitting form data:", formData);
+    console.log("Submitting form data:", formData);
 
     const sanitizedData = { ...formData };
     Object.keys(sanitizedData).forEach((key) => {
@@ -156,9 +156,9 @@ const ComplainModal = ({ data }) => {
                   Complain To <small>(Eg: Administration)</small>
                 </label>
                 <select
-                  name="complain_to" // Updated to complain_to
+                  name="complain_to" 
                   id="complain"
-                  value={formData.complain_to} // Updated to formData.complain_to
+                  value={formData.complain_to}
                   onChange={handleChange}
                   required
                   className="w-full px-3 py-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
