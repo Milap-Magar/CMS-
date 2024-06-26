@@ -24,7 +24,7 @@ const Aside = ({ isMenuOpen, setIsMenuOpen }) => {
     <aside
       className={`${
         isMenuOpen ? "block" : "hidden"
-      } md:block absolute md:static top-0 left-0 w-full md:w-[20vw] bg-slate-300 shadow-2xl shadow-slate-500 rounded-3xl md:p-0 h-[75vh] md:h-[85vh] z-10`}
+      } md:block absolute md:static top-0 left-0 w-full md:w-[20vw] bg-slate-200 shadow-2xl shadow-cyan-500 rounded-3xl md:p-0 h-[75vh] md:h-[85vh] z-10`}
     >
       <span
         className={`${

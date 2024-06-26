@@ -5,6 +5,9 @@ import axios from "axios";
 import Image from "../assets/background.jpg";
 import Logo from "../assets/logo.png";
 
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function Register() {
   const [values, setValues] = useState({
     name: "",
@@ -19,9 +22,10 @@ function Register() {
     role: "student",
   });
 
+  console.log("🚀 ~ Register ~ values:", values);
+
   const [errors, setErrors] = useState({});
-  const [showModal, setShowModal] = useState(false);
-  const [apiResponse, setApiResponse] = useState(null);
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -34,7 +38,6 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = reg_validation(values);
-    // console.log("🚀 ~ handleSubmit ~ values:", values);
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
@@ -45,38 +48,25 @@ function Register() {
         );
 
         if (response.status === 200) {
-          setApiResponse({
-            success: true,
-            message: "Registration successful!",
-          });
+          toast.success("Registration successful! Redirecting to login...");
           console.log("Registration successful:", response.data);
-          navigate("/user/login");
+          setTimeout(() => navigate("/user/login"), 2000);
         } else {
-          setApiResponse({
-            success: false,
-            message: response.data.error || "Registration failed",
-          });
+          toast.error(response.data.error || "Registration failed");
           console.log("Registration failed:", response.data);
         }
       } catch (error) {
-        setApiResponse({
-          success: false,
-          message: "An error occurred. Please try again.",
-        });
+        toast.error("An error occurred. Please try again.");
         console.error("Error:", error);
       }
     } else {
-      setShowModal(true);
+      console.log("Validation errors:", validationErrors);
     }
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
   };
 
   return (
     <div
-      className={`min-h-screen flex items-center justify-center bg-cover bg-center  py-12 px-4 sm:px-6 lg:px-8`}
+      className="min-h-screen flex items-center justify-center bg-cover bg-center py-12 px-4 sm:px-6 lg:px-8"
       style={{ backgroundImage: `url(${Image})` }}
     >
       <div className="max-w-lg w-full">
@@ -103,7 +93,6 @@ function Register() {
                 id="name"
                 name="name"
                 type="text"
-                autoComplete="name"
                 required
                 className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                   errors.name ? "border-red-500" : ""
@@ -126,15 +115,13 @@ function Register() {
               </label>
               <input
                 id="dob"
-                name="dob" // Ensure the name attribute matches the state key 'dob'
+                name="DOB" // Use the correct state key
                 type="date"
-                autoComplete="bday"
                 required
                 className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                   errors.dob ? "border-red-500" : ""
                 }`}
-                placeholder="Enter your date of birth"
-                value={values.dob} // Ensure the state key is 'dob' (not 'DOB')
+                value={values.DOB} // Use the correct state key
                 onChange={handleChange}
               />
               {errors.dob && (
@@ -152,7 +139,7 @@ function Register() {
               <input
                 id="symbol"
                 name="symbol"
-                type="int"
+                type="text"
                 required
                 className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                   errors.symbol ? "border-red-500" : ""
@@ -177,7 +164,6 @@ function Register() {
                 id="email"
                 name="email"
                 type="email"
-                autoComplete="email"
                 required
                 className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                   errors.email ? "border-red-500" : ""
@@ -202,7 +188,6 @@ function Register() {
                 id="password"
                 name="password"
                 type="password"
-                autoComplete="password"
                 required
                 className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                   errors.password ? "border-red-500" : ""
@@ -226,8 +211,7 @@ function Register() {
               <input
                 id="phone"
                 name="phone"
-                type="number"
-                autoComplete="tel"
+                type="tel"
                 required
                 className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                   errors.phone ? "border-red-500" : ""
@@ -252,7 +236,6 @@ function Register() {
                 id="address"
                 name="address"
                 type="text"
-                autoComplete="address"
                 required
                 className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                   errors.address ? "border-red-500" : ""
@@ -276,25 +259,23 @@ function Register() {
               <select
                 id="program"
                 name="program"
-                autoComplete="program"
                 required
                 className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                   errors.program ? "border-red-500" : ""
                 }`}
-                placeholder="Enter your program"
                 value={values.program}
                 onChange={handleChange}
               >
                 <option value="" disabled>
                   Select Program
                 </option>
-                <option value="engineering">Engineering</option>
-                <option value="medicine">Medicine</option>
-                <option value="science">Science</option>
-                <option value="arts">Arts</option>
-                <option value="business">Business</option>
-                <option value="law">Law</option>
-                <option value="humanities">Humanities</option>
+                <option value="BCA">Bachelor's in Computer Application</option>
+                <option value="BBM">Bachelor's in Business Management</option>
+                <option value="BBS">Bachelor's in Business Studies</option>
+                <option value="BHM">Bachelor's in Hotel Management</option>
+                <option value="BBA">
+                  Bachelor's in Business Administration
+                </option>
               </select>
               {errors.program && (
                 <p className="text-red-500 text-xs italic">{errors.program}</p>
@@ -335,108 +316,24 @@ function Register() {
               )}
             </div>
 
-            <div className="flex items-center justify-center gap-5">
+            <div className="flex items-center justify-between">
               <button
                 type="submit"
-                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               >
                 Register
               </button>
-              <Link to={"/user/login"}>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                  Log In
-                </button>
+              <Link
+                to="/user/login"
+                className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+              >
+                Already have an account?
               </Link>
             </div>
           </form>
         </div>
       </div>
-      {showModal && (
-        <div className="fixed z-10 inset-0 overflow-y-auto">
-          <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div
-              className="fixed inset-0 transition-opacity"
-              aria-hidden="true"
-            >
-              <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-            </div>
-            <span
-              className="hidden sm:inline-block sm:align-middle sm:h-screen"
-              aria-hidden="true"
-            >
-              &#8203;
-            </span>
-            <div className="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div className="sm:flex sm:items-start">
-                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <h3 className="text-lg leading-6 font-medium text-gray-900">
-                      Validation Error
-                    </h3>
-                    <div className="mt-2">
-                      <p className="text-sm text-gray-500">
-                        Please fill out all the required fields correctly.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button
-                  onClick={closeModal}
-                  type="button"
-                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-      {apiResponse && (
-        <div className="fixed z-10 inset-0 overflow-y-auto">
-          <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div
-              className="fixed inset-0 transition-opacity"
-              aria-hidden="true"
-            >
-              <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-            </div>
-            <span
-              className="hidden sm:inline-block sm:align-middle sm:h-screen"
-              aria-hidden="true"
-            >
-              &#8203;
-            </span>
-            <div className="inline-block align-middle bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div className="sm:flex sm:items-start">
-                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <h3 className="text-lg leading-6 font-medium text-gray-900">
-                      {apiResponse.success ? "Success" : "Error"}
-                    </h3>
-                    <div className="mt-2">
-                      <p className="text-sm text-gray-500">
-                        {apiResponse.message}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button
-                  onClick={() => setApiResponse(null)}
-                  type="button"
-                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 }

@@ -113,7 +113,7 @@ const ComplaintsChart = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="relative w-full h-auto p-4 rounded-2xl shadow-lg shadow-slate-500 overflow-hidden">
+    <div className="relative w-full h-auto p-4 rounded-2xl shadow-lg shadow-fuchsia-400 overflow-hidden">
       <style>
         {`
           .gradient-background {
@@ -133,7 +133,7 @@ const ComplaintsChart = () => {
       <div className="gradient-background absolute inset-0 z-0"></div>
       <div className="relative z-10">
         <h2 className="text-lg font-semibold mb-4 text-white">
-          Complaints Overview
+          Complaints Overview:
         </h2>
         {chartData ? (
           <div className="h-[100px] md:h-[200px]">

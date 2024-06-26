@@ -116,7 +116,7 @@ const ComplaintsChart = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="w-full h-auto p-4 rounded-2xl shadow-lg shadow-slate-500 relative overflow-auto">
+    <div className="w-full h-auto p-4 rounded-2xl shadow-lg shadow-fuchsia-400 relative overflow-auto">
       <style>
         {`
           .gradient-background {

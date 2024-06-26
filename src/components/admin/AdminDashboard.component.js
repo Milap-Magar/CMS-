@@ -53,19 +53,19 @@ const Dashboard = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="bg-white overflow-x-hidden min-h-full flex flex-col overflow-hidden">
+    <div className="bg-gradient-to-r from-slate-300 to-slate-500 overflow-x-hidden min-h-full flex flex-col overflow-hidden">
       {userData ? (
         <div className="flex-grow flex flex-col items-center font-raleway px-5 py-2">
           <div className="flex flex-col justify-center items-center mb-4">
             <Button
               icons={<FaBars />}
               onClick={() => setIsMenuOpen(true)}
-              className={`text-2xl md:hidden absolute top-5 right-5`}
+              className="text-2xl md:hidden absolute top-5 right-5"
             />
             <Headers
-              h1={`Patan Multiple Campus`}
-              span={`Complain Management System`}
-              address={`Patandhoka, Lalitpur-13`}
+              h1="Patan Multiple Campus"
+              span="Complain Management System"
+              address="Patandhoka, Lalitpur-13"
             />
           </div>
           <div className="flex flex-col md:flex-row flex-grow w-full relative">

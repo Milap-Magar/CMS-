@@ -1,4 +1,4 @@
-const  reg_validation = (values) => {
+const reg_validation = (values) => {
   const errors = {};
 
   if (!values.name) {
@@ -25,8 +25,8 @@ const  reg_validation = (values) => {
   if (!values.address) {
     errors.address = "Address is required";
   }
-  if (!values.symbolNo) {
-    errors.symbolNo = "Symbol number is required";
+  if (!values.symbol) {
+    errors.symbol = "Symbol number is required";
   }
   if (!values.semester) {
     errors.semester = "Semester is required";
