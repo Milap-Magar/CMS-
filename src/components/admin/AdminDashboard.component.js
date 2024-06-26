@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
 import { FaBars } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Button from "./Button";
 import Aside from "./Aside";
 import Main from "../../pages/Main.page";
 import Headers from "./Headers.component";
+import Loading from "../Loading";
 
 const Dashboard = () => {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showLoadingScreen, setShowLoadingScreen] = useState(true);
 
   const navigate = useNavigate();
 
@@ -45,12 +48,32 @@ const Dashboard = () => {
       }
     };
 
+    const loadingTimer = setTimeout(() => {
+      setShowLoadingScreen(false);
+
+      toast.success(`Welcome Admin!`, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }, 2000);
+
     fetchDashboardData();
-  }, []);
 
-  if (loading) return <div>Loading...</div>;
+    return () => clearTimeout(loadingTimer);
+  }, [navigate]);
 
-  if (error) return <div>Error: {error}</div>;
+  if (showLoadingScreen) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div className="bg-gradient-to-r from-slate-300 to-slate-500 overflow-x-hidden min-h-full flex flex-col overflow-hidden">
@@ -76,6 +99,7 @@ const Dashboard = () => {
       ) : (
         navigate("/")
       )}
+      <ToastContainer />
     </div>
   );
 };

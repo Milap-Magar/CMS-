@@ -7,7 +7,7 @@ import { CgProfile, CgLogOut } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 
 const Sidebar = ({ userData }) => {
-  // console.log("🚀 ~ Sidebar ~ userData:", userData);
+  console.log("🚀 ~ Sidebar ~ userData:", userData);
 
   const navigate = useNavigate();
 
@@ -79,8 +79,8 @@ const Sidebar = ({ userData }) => {
               !open && "scale-0"
             }`}
           >
-            {/* {userData.name.charAt(0).toUpperCase() + userData.name.slice(1)} */}
-            NAME
+            {userData.name.charAt(0).toUpperCase() + userData.name.slice(1)}
+            {/* NAME */}
           </h2>
           <ul className="pt-6">
             {Menus.map((menu, index) => (

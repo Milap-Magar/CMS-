@@ -6,8 +6,6 @@ import UserRegister from "./auth/UserRegister";
 import Main from "./auth/Main";
 import UserLogin from "./auth/UserLogin";
 
-// import PrivateRoutes from "./private/PrivateRoutes";
-
 import UserDashboard from "./components/user/UserDashboard.component";
 import AdminDashboard from "./components/admin/AdminDashboard.component";
 import Complaint from "./components/user/Complaint.component";

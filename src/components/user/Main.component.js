@@ -32,7 +32,7 @@ const Main = ({ userData, error }) => {
       <ToastContainer limit={1} toastClassName="custom-toast-container" />
       <div className="container mx-auto">
         <div className="w-full flex flex-col justify-center items-center py-8 bg-amber-500 text-white text-xl shadow-xl shadow-amber-400">
-          <h6>Patan Multiple Campus</h6>
+          <h6>College</h6>
           <h2 className="text-xl sm:2xl md:3xl lg:5xl text-slate-900">
             Complain Management System
           </h2>

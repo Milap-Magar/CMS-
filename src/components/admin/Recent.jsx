@@ -24,6 +24,7 @@ const Recent = () => {
           (a, b) => new Date(b.created_at) - new Date(a.created_at)
         );
         const recentComplaints = sortedComplaints.slice(0, 2);
+        // console.log("🚀 ~ .then ~ recentComplaints:", recentComplaints);
         setComplaints(recentComplaints);
       })
       .catch((error) => console.error("Error fetching complaints:", error));
