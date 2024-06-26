@@ -1,19 +1,22 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import AdminLogin from "./auth/AdminLogin";
-import UserRegister from "./auth/UserRegister";
 import Main from "./auth/Main";
-import UserLogin from "./auth/UserLogin";
 
+// Student Imports
+import UserRegister from "./auth/UserRegister";
+import UserLogin from "./auth/UserLogin";
 import UserDashboard from "./components/user/UserDashboard.component";
-import AdminDashboard from "./components/admin/AdminDashboard.component";
 import Complaint from "./components/user/Complaint.component";
+import DetailComplaint from "./components/user/Details.component";
+
+// Admin Imports
+import AdminLogin from "./auth/AdminLogin";
+import AdminDashboard from "./components/admin/AdminDashboard.component";
 import View from "./pages/View.page";
 import ComplaintHistory from "./pages/ComplainHistory.page";
 import SubAdmin from "./pages/SubAdmin.page";
 import Total from "./pages/Total.page";
-import ComplaintDetails from "./components/user/ComplaintDetails.component";
 
 const App = () => {
   return (
@@ -27,7 +30,7 @@ const App = () => {
         {/* User Routes */}
         <Route path="/user/dashboard" element={<UserDashboard />} />
         <Route path="/user/complaint" element={<Complaint />} />
-        <Route path="/user/complaintdetails" element={<ComplaintDetails />} />
+        <Route path="/user/complaintdetails" element={<DetailComplaint />} />
 
         {/* Admin Routes  */}
         <Route path="/admin/dashboard" element={<AdminDashboard />} />

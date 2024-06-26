@@ -7,17 +7,13 @@ const Main = ({ userData, error }) => {
     if (userData && userData.name) {
       const toastShownKey = `toastShown_${userData.name}`;
 
-      // Check if the toast was already shown in this session
       const toastShown = sessionStorage.getItem(toastShownKey);
 
       if (!toastShown) {
-        // Show the toast
         toast.dismiss();
         toast.success(`Hi ${userData.name}! Welcome to the system.`, {
           className: "custom-toast",
         });
-
-        // Set the flag in session storage
         sessionStorage.setItem(toastShownKey, "true");
       }
     }
@@ -32,8 +28,7 @@ const Main = ({ userData, error }) => {
       <ToastContainer limit={1} toastClassName="custom-toast-container" />
       <div className="container mx-auto">
         <div className="w-full flex flex-col justify-center items-center py-8 bg-amber-500 text-white text-xl shadow-xl shadow-amber-400">
-          <h6>College</h6>
-          <h2 className="text-xl sm:2xl md:3xl lg:5xl text-slate-900">
+          <h2 className="text-2xl sm:3xl md:4xl lg:5xl text-slate-900">
             Complain Management System
           </h2>
         </div>

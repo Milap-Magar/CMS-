@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { MdClose } from "react-icons/md"; // Importing MdClose from react-icons/md
+import { MdClose } from "react-icons/md";
 
 const AddStudentForm = ({ isOpen, onClose, onAddStudent }) => {
   const [values, setValues] = useState({
@@ -33,8 +33,8 @@ const AddStudentForm = ({ isOpen, onClose, onAddStudent }) => {
         values
       );
       if (response.data.success) {
-        onAddStudent(response.data.data); // Assuming the API returns the newly added student data
-        onClose(); // Close the modal after successful addition
+        onAddStudent(response.data.data);
+        onClose();
         toast.success("Student added successfully!");
       } else {
         console.error("Failed to add student:", response.data.error);
@@ -57,12 +57,10 @@ const AddStudentForm = ({ isOpen, onClose, onAddStudent }) => {
           className="bg-white p-8 rounded-lg shadow-lg"
           style={{ maxWidth: "80vw", maxHeight: "90vh", overflow: "auto" }}
         >
-          {/* Close Icon */}
           <div className="flex justify-end">
             <MdClose className="cursor-pointer" size={24} onClick={onClose} />
           </div>
 
-          {/* Form Content */}
           <h2 className="text-xl font-semibold mb-4">Add New Student</h2>
           <form onSubmit={handleSubmit}>
             {/* Name Input */}

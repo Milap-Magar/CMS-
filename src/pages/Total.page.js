@@ -96,7 +96,7 @@ const Total = () => {
 
   const handleAddStudent = (newStudent) => {
     setTotals((prevTotals) => [...prevTotals, newStudent]);
-    setIsAddModalOpen(false); // Close modal after adding student
+    setIsAddModalOpen(false);
   };
 
   return (
@@ -113,13 +113,13 @@ const Total = () => {
             span={`Complain Management System`}
             address={`Patandhoka, Lalitpur-13`}
           />
+        </div>
           <button
-            className="bg-blue-500 text-white px-4 py-2 rounded-md mb-4"
+            className="bg-blue-500 text-white px-4 py-1 rounded-md "
             onClick={() => setIsAddModalOpen(true)}
           >
             Add Student
           </button>
-        </div>
         <div className="flex flex-col md:flex-row flex-grow w-full relative">
           <Aside isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
           <div className="w-full md:w-[80%] p-4">
@@ -197,7 +197,6 @@ const Total = () => {
           total={selectedTotal}
         />
       )}
-      {/* Add Student Form Modal */}
       <AddStudentForm
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
