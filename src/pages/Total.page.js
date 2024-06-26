@@ -7,16 +7,17 @@ import Aside from "../components/admin/Aside";
 import Button from "../components/admin/Button";
 import Headers from "../components/admin/Headers.component";
 import TotalDetails from "./Details.total";
+import AddStudentForm from "./AddStudent.modal";
 
 const Total = () => {
   const navigate = useNavigate();
 
   const [totals, setTotals] = useState([]);
-  console.log("🚀 ~ Total ~ totals:", totals);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedTotal, setSelectedTotal] = useState(null);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchTotals = async () => {
@@ -93,6 +94,11 @@ const Total = () => {
     }
   };
 
+  const handleAddStudent = (newStudent) => {
+    setTotals((prevTotals) => [...prevTotals, newStudent]);
+    setIsAddModalOpen(false); // Close modal after adding student
+  };
+
   return (
     <div className="bg-white overflow-x-hidden min-h-screen flex flex-col">
       <div className="flex-grow flex flex-col items-center font-raleway px-5 py-2">
@@ -107,6 +113,12 @@ const Total = () => {
             span={`Complain Management System`}
             address={`Patandhoka, Lalitpur-13`}
           />
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded-md mb-4"
+            onClick={() => setIsAddModalOpen(true)}
+          >
+            Add Student
+          </button>
         </div>
         <div className="flex flex-col md:flex-row flex-grow w-full relative">
           <Aside isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
@@ -119,6 +131,9 @@ const Total = () => {
               <table className="min-w-full bg-slate-200 shadow-lg shadow-slate-400 text-center">
                 <thead>
                   <tr className="border-[2px] border-slate-400 rounded-xl">
+                    <th className=" p-2 border-[2px] border-slate-700">
+                      Student ID
+                    </th>
                     <th className=" p-2 border-[2px] border-slate-700">Name</th>
                     <th className=" p-2 border-[2px] border-slate-700">
                       Symbol
@@ -129,9 +144,7 @@ const Total = () => {
                     <th className=" p-2 border-[2px] border-slate-700">
                       Phone
                     </th>
-                    <th className=" p-2 border-[2px] border-slate-700">
-                      Action
-                    </th>
+                    <th className=" border-[2px] border-slate-700">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -140,6 +153,9 @@ const Total = () => {
                       key={total.Sid}
                       className="border-[2px] border-slate-400 text-center"
                     >
+                      <td className="p-2 border-[2px] border-slate-400">
+                        {total.Sid}
+                      </td>
                       <td className="p-2 border-[2px] border-slate-400">
                         {total.name}
                       </td>
@@ -181,6 +197,12 @@ const Total = () => {
           total={selectedTotal}
         />
       )}
+      {/* Add Student Form Modal */}
+      <AddStudentForm
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+        onAddStudent={handleAddStudent}
+      />
     </div>
   );
 };
