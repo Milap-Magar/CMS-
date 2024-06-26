@@ -6,14 +6,17 @@ import { FaBars } from "react-icons/fa";
 import Aside from "../components/admin/Aside";
 import Button from "../components/admin/Button";
 import Headers from "../components/admin/Headers.component";
+import TotalDetails from "./Details.total";
 
 const Total = () => {
   const navigate = useNavigate();
 
   const [totals, setTotals] = useState([]);
+  console.log("🚀 ~ Total ~ totals:", totals);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [selectedTotal, setSelectedTotal] = useState(null);
 
   useEffect(() => {
     const fetchTotals = async () => {
@@ -32,8 +35,6 @@ const Total = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-
-        // console.log("🚀 ~ fetchTotals ~ response:", response);
 
         if (response.data.success) {
           const sortedTotals = response.data.totals.sort(
@@ -56,6 +57,41 @@ const Total = () => {
 
     fetchTotals();
   }, [navigate]);
+
+  const handleViewDetails = (total) => {
+    setSelectedTotal(total);
+  };
+
+  const handleDeleteTotal = async (totalId) => {
+    try {
+      const token = localStorage.getItem("Token");
+
+      if (!token) {
+        setError("No token found");
+        navigate("/");
+        return;
+      }
+
+      const response = await axios.delete(
+        `http://localhost:8080/admin/total/${totalId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.data.success) {
+        setTotals((prevTotals) =>
+          prevTotals.filter((total) => total.Sid !== totalId)
+        );
+      } else {
+        setError("Failed to delete total");
+      }
+    } catch (err) {
+      setError(err.response?.data?.error || "Error deleting total");
+    }
+  };
 
   return (
     <div className="bg-white overflow-x-hidden min-h-screen flex flex-col">
@@ -80,29 +116,21 @@ const Total = () => {
             ) : error ? (
               <div>Error: {error}</div>
             ) : (
-              <table className="min-w-full bg-slate-200 shadow-lg shadow-slate-400">
+              <table className="min-w-full bg-slate-200 shadow-lg shadow-slate-400 text-center">
                 <thead>
                   <tr className="border-[2px] border-slate-400 rounded-xl">
-                    <th className="text-left p-2 border-[2px] border-slate-700">
-                      Name
-                    </th>
-                    <th className="text-left p-2 border-[2px] border-slate-700">
+                    <th className=" p-2 border-[2px] border-slate-700">Name</th>
+                    <th className=" p-2 border-[2px] border-slate-700">
                       Symbol
                     </th>
-                    <th className="text-left p-2 border-[2px] border-slate-700">
+                    <th className=" p-2 border-[2px] border-slate-700">
                       Email
                     </th>
-                    <th className="text-left p-2 border-[2px] border-slate-700">
+                    <th className=" p-2 border-[2px] border-slate-700">
                       Phone
                     </th>
-                    <th className="text-left p-2 border-[2px] border-slate-700">
-                      Address
-                    </th>
-                    <th className="text-left p-2 border-[2px] border-slate-700">
-                      Program
-                    </th>
-                    <th className="text-left p-2 border-[2px] border-slate-700">
-                      Semester
+                    <th className=" p-2 border-[2px] border-slate-700">
+                      Action
                     </th>
                   </tr>
                 </thead>
@@ -110,7 +138,7 @@ const Total = () => {
                   {totals.map((total) => (
                     <tr
                       key={total.Sid}
-                      className="border-[2px] border-slate-400"
+                      className="border-[2px] border-slate-400 text-center"
                     >
                       <td className="p-2 border-[2px] border-slate-400">
                         {total.name}
@@ -124,14 +152,19 @@ const Total = () => {
                       <td className="p-2 border-[2px] border-slate-400">
                         {total.phone}
                       </td>
-                      <td className="p-2 border-[2px] border-slate-400">
-                        {total.address}
-                      </td>
-                      <td className="p-2 border-[2px] border-slate-400">
-                        {total.program}
-                      </td>
-                      <td className="p-2 border-[2px] border-slate-400">
-                        {total.semester}
+                      <td className="p-2 flex gap-2">
+                        <button
+                          className="bg-yellow-500 text-white px-2 py-1 rounded"
+                          onClick={() => handleViewDetails(total)}
+                        >
+                          View Details
+                        </button>
+                        <button
+                          className="bg-red-500 text-white px-2 py-1 rounded"
+                          onClick={() => handleDeleteTotal(total.Sid)}
+                        >
+                          Delete
+                        </button>
                       </td>
                     </tr>
                   ))}
@@ -141,6 +174,13 @@ const Total = () => {
           </div>
         </div>
       </div>
+      {selectedTotal && (
+        <TotalDetails
+          isOpen={!!selectedTotal}
+          onClose={() => setSelectedTotal(null)}
+          total={selectedTotal}
+        />
+      )}
     </div>
   );
 };
