@@ -51,7 +51,7 @@ const ComplainDetails = ({ userData }) => {
   return (
     <>
       <div className="flex bg-slate-200 h-screen w-full body">
-        <div className="min-h-screen w-full flex flex-col items-start justify-center bg-amber-100 overflow-hidden">
+        <div className="min-h-screen w-full flex flex-col items-start justify-center bg-amber-100 overflow-y-scroll overflow-x-hidden pt-[40vh]">
           <div className="flex py-4 px-5">
             <IoIosArrowForward className="h-7 w-8" />
             <span className="text-xl font-mono">Complaint Details: </span>

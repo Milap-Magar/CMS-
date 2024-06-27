@@ -6,7 +6,7 @@ import { PiStudentBold } from "react-icons/pi";
 import { GrUserAdmin } from "react-icons/gr";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
-import Button from "./Button";
+import Button from "../Button";
 
 import Accordion from "./Accordian.component";
 

@@ -17,7 +17,7 @@ function UserLogin() {
       [e.target.name]: e.target.value,
     });
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = validate(values);
@@ -31,7 +31,7 @@ function UserLogin() {
             localStorage.setItem("Token", res.data.token);
             navigate("/user/dashboard");
           } else {
-            alert("No records")
+            alert("No records");
           }
         })
         .catch((err) => {
@@ -65,7 +65,7 @@ function UserLogin() {
           <h2 className="text-center text-xl font-medium text-gray-900 mb-4 font-mono">
             Student Login Page
           </h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} noValidate>
             <div className="mb-4">
               <label
                 htmlFor="email"

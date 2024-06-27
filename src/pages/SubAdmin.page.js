@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import Button from "../components/admin/Button";
+import Button from "../components/Button";
 import Headers from "../components/admin/Headers.component";
-
 import { FaBars, FaFileSignature } from "react-icons/fa";
 import Aside from "../components/admin/Aside";
+import { useNavigate } from "react-router-dom";
 
 const SubAdmin = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -19,13 +22,6 @@ const SubAdmin = () => {
     role: "admin",
   });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
   const [formErrors, setFormErrors] = useState({
     email: "",
     password: "",
@@ -34,19 +30,12 @@ const SubAdmin = () => {
     address: "",
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/admin/register",
-        formData
-      );
-      console.log("Registration successful:", response.data);
-      // Optionally, you can redirect or show a success message here
-    } catch (error) {
-      console.error("Error registering admin:", error);
-      // Handle error display or logging
-    }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
 
   const validateForm = () => {
@@ -96,12 +85,57 @@ const SubAdmin = () => {
     }
 
     setFormErrors(errors);
-
     return valid;
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      toast.error("Please fill out the form correctly.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/admin/register",
+        formData
+      );
+      toast.success("Registration successful!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      navigate("/admin/dashboard");
+    } catch (error) {
+      toast.error("Error registering admin. Please try again.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      console.error("Error registering admin:", error);
+    }
+  };
+
   return (
-    <div className="bg-white min-h-screen flex flex-col overflow-hideen">
+    <div className="bg-white min-h-screen flex flex-col overflow-hidden">
+      <ToastContainer /> {/* Toast Container for notifications */}
       <div className="flex-grow flex flex-col items-center font-raleway px-5 py-2">
         <div className="flex flex-col justify-center items-center mb-4">
           <Button
@@ -122,6 +156,7 @@ const SubAdmin = () => {
             className="w-[75vw] sm:w-[60vw] md:w-[50vw] h-auto bg-slate-200 px-10 py-2
             flex flex-col justify-center absolute top-0 left-8 sm:left-36 md:left-96  rounded-xl
             shadow-xl shadow-slate-700"
+            noValidate
           >
             <div className="flex pb-4">
               <FaFileSignature className="h-5 w-5" />
@@ -250,7 +285,6 @@ const SubAdmin = () => {
             <div className="text-center">
               <button
                 type="submit"
-                onClick={validateForm}
                 className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Register

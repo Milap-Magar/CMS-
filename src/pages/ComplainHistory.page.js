@@ -1,10 +1,9 @@
-// ComplaintHistory.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import Aside from "../components/admin/Aside";
-import Button from "../components/admin/Button";
+import Button from "../components/Button";
 import Headers from "../components/admin/Headers.component";
 
 const ComplaintHistory = () => {

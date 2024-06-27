@@ -5,7 +5,7 @@ import { FaBars } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import Button from "./Button";
+import Button from "../Button";
 import Aside from "./Aside";
 import Main from "../../pages/Main.page";
 import Headers from "./Headers.component";
@@ -86,9 +86,9 @@ const Dashboard = () => {
               className="text-2xl md:hidden absolute top-5 right-5"
             />
             <Headers
-              h1="Patan Multiple Campus"
-              span="Complain Management System"
-              address="Patandhoka, Lalitpur-13"
+              // h1="Patan Multiple Campus"
+              span="Student Complain Management System"
+              // address="Patandhoka, Lalitpur-13"
             />
           </div>
           <div className="flex flex-col md:flex-row flex-grow w-full relative">

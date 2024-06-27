@@ -31,7 +31,7 @@ const Recent = () => {
   }, []);
 
   return (
-    <div className="flex-grow overflow-y-auto font-raleway absolute bottom-0 sm:bottom-2 md:bottom-6 w-[75vw] md:w-[68vw] h-[200px]">
+    <div className="flex-grow overflow-y-auto font-raleway absolute bottom-0 sm:bottom-2 md:bottom-10 w-[75vw] md:w-[68vw] h-[200px]">
       <div className="p-4 border bg-gradient-to-b from-purple-200 to-purple-800 rounded-2xl shadow-lg shadow-sky-400">
         <h2 className="text-xl font-semibold mb-4">Recent Complaints:</h2>
         <div className="space-y-4">

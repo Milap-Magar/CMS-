@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-// import { FiMenu, FiSearch, FiX } from "react-icons/fi";
+import { FiMenu, FiX } from "react-icons/fi";
 import Image from "../assets/background.jpg";
 import Logo from "../assets/logo.jpeg";
 
 const Main = () => {
-  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth > 768);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 768);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth > 768);
+      setIsSmallScreen(window.innerWidth <= 768);
     };
 
     window.addEventListener("resize", handleResize);
@@ -26,16 +26,14 @@ const Main = () => {
 
   return (
     <div className="relative overflow-hidden h-screen">
-      <figure className="absolute inset-0">
+      <figure className={`absolute inset-0 ${menuOpen ? "blur-sm" : ""}`}>
         <img
           src={Image}
           alt="main image"
           className="w-full h-full object-cover"
         />
       </figure>
-
-      {/* Nav content section */}
-      <nav className="flex items-center justify-between py-5 px-1 absolute top-0 left-0 right-0 bg-opacity-50 bg-slate-300 text-slate-900">
+      <nav className="flex items-center justify-between py-5 px-4 absolute top-0 left-0 right-0 bg-opacity-50 bg-slate-300 text-slate-900 z-20">
         <figure>
           <img
             src={Logo}
@@ -45,40 +43,53 @@ const Main = () => {
         </figure>
         <div className="flex items-center justify-center flex-grow ps-4">
           <div>
-            <h3 className="text-md sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl font-bold text-center pb-1">
-              Patan Multiple Campus
+            <h3 className="text-md sm:text-xl md:text-xl lg:text-2xl xl:text-3xl font-bold text-center pb-1">
+              Student Complaint Management System
             </h3>
-            <div className="text-sm text-slate-600 text-center ">
-              <p>Patandhoka, Lalitpur</p>
+            <div className="text-sm text-slate-600 text-center">
               <p>Phone No: 01-1234567</p>
             </div>
           </div>
         </div>
 
-        {/* list bar */}
+        {isSmallScreen && (
+          <button
+            className="text-slate-900 focus:outline-none z-30" 
+            onClick={toggleMenu}
+          >
+            {menuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+          </button>
+        )}
+
+        {/* Menu list */}
         <ul
-          className={`flex flex-col sm:flex sm:flex-col md:flex md:flex-row gap-2 items-center text-black lg:text-lg md:text-md sm:text-sm text-xs`}
+          className={`fixed inset-0 flex flex-col items-center justify-center bg-slate-300 transform transition-transform duration-300 ease-in-out ${
+            menuOpen ? "translate-x-0" : "translate-x-full"
+          } sm:static sm:translate-x-0 sm:flex-row sm:flex sm:gap-4 sm:bg-transparent z-20`}
         >
-          <li>
+          <li className="m-2 sm:m-0">
             <Link
               to={"/user/login"}
-              className="bg-green-400 hover:text-white px-1 py-1 md:px-4 md:py-2 rounded-md transition duration-1000"
+              className="bg-green-400 hover:text-white px-4 py-2 rounded-md transition duration-1000"
+              onClick={() => setMenuOpen(false)}
             >
               Student Login
             </Link>
           </li>
-          <li>
+          <li className="m-2 sm:m-0">
             <Link
               to={"/user/register"}
-              className="hover:bg-sky-400 hover:text-white px-0 py-0 md:px-6 md:py-2 rounded-2xl transition duration-700"
+              className="hover:bg-sky-400 hover:text-white px-6 py-2 rounded-2xl transition duration-700"
+              onClick={() => setMenuOpen(false)}
             >
               Student Register
             </Link>
           </li>
-          <li>
+          <li className="m-2 sm:m-0">
             <Link
               to={"/admin/login"}
-              className="hover:bg-sky-400 hover:text-white px-1 py-1 md:px-6 md:py-2 rounded-2xl transition duration-700"
+              className="hover:bg-sky-400 hover:text-white px-6 py-2 rounded-2xl transition duration-700"
+              onClick={() => setMenuOpen(false)}
             >
               Admin Login
             </Link>
@@ -86,8 +97,11 @@ const Main = () => {
         </ul>
       </nav>
 
-      {/* Main content section */}
-      <div className="absolute inset-x-0 top-36 flex items-center justify-center h-auto px-4 sm:px-8 py-4">
+      <div
+        className={`absolute inset-x-0 top-36 flex items-center justify-center h-auto px-4 sm:px-8 py-4 transition-opacity duration-300 ease-in-out z-10 ${
+          menuOpen ? "opacity-50 pointer-events-none" : "opacity-100"
+        }`}
+      >
         <div className="text-center">
           <div className="container bg-white p-5 rounded-2xl">
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-3xl font-bold text-slate-900 mb-4">

@@ -22,7 +22,7 @@ function Register() {
     role: "student",
   });
 
-  console.log("🚀 ~ Register ~ values:", values);
+  // console.log("🚀 ~ Register ~ values:", values);
 
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState("");
@@ -81,7 +81,7 @@ function Register() {
           <h2 className="text-center text-xl font-medium text-gray-900 mb-4 font-mono">
             Student Registration Form
           </h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} noValidate>
             <div className="mb-4">
               <label
                 htmlFor="name"

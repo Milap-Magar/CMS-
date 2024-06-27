@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { MdClose } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const AddStudentForm = ({ isOpen, onClose, onAddStudent }) => {
+  const navigate = useNavigate();
   const [values, setValues] = useState({
     name: "",
     DOB: "",
@@ -36,7 +38,8 @@ const AddStudentForm = ({ isOpen, onClose, onAddStudent }) => {
         onAddStudent(response.data.data);
         onClose();
         toast.success("Student added successfully!");
-      } else {
+        navigate("/admin/total");
+      } else {  
         console.error("Failed to add student:", response.data.error);
         toast.error("Failed to add student.");
       }

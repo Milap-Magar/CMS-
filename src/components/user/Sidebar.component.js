@@ -7,8 +7,6 @@ import { CgProfile, CgLogOut } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 
 const Sidebar = ({ userData }) => {
-  console.log("🚀 ~ Sidebar ~ userData:", userData);
-
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -21,6 +19,8 @@ const Sidebar = ({ userData }) => {
   const handleComplaint = () => navigate("/user/complaint");
 
   const handleDetails = () => navigate("/user/complaintdetails");
+
+  const handleAccount = () => navigate("/user/settings");
 
   const [open, setOpen] = useState(true);
 
@@ -41,7 +41,11 @@ const Sidebar = ({ userData }) => {
       src: <FaHistory className="h-8 w-7" />,
       onClick: handleDetails,
     },
-    { title: "Account Settings", src: <CgProfile className="h-8 w-7" /> },
+    {
+      title: "Account Settings",
+      src: <CgProfile className="h-8 w-7" />,
+      onClick: handleAccount,
+    },
     {
       title: "Logout",
       src: <CgLogOut className="h-8 w-7" />,
