@@ -83,7 +83,7 @@ const Aside = ({ isMenuOpen, setIsMenuOpen }) => {
             }`}
           >
             <IoSettingsOutline className="w-6 h-5" />
-            Settings
+            Account Settings
           </li>
         </Link>
         <li
