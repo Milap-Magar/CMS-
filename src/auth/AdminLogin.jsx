@@ -66,7 +66,7 @@ function AdminLogin() {
           <h2 className="text-center text-xl font-medium text-gray-900 mb-4 font-mono">
             Admin Login Page
           </h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} noValidate>
             <div className="mb-4">
               <label
                 htmlFor="email"

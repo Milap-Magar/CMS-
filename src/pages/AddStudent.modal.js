@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { MdClose } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import reg_validation from "../validation/register-validation";
 
 const AddStudentForm = ({ isOpen, onClose, onAddStudent }) => {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ const AddStudentForm = ({ isOpen, onClose, onAddStudent }) => {
     semester: "",
     role: "student",
   });
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,17 +31,19 @@ const AddStudentForm = ({ isOpen, onClose, onAddStudent }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const validationErrors = reg_validation(values);
+    setErrors(validationErrors);
     try {
       const response = await axios.post(
         "http://localhost:8080/user/register",
-        values
+        validationErrors
       );
       if (response.data.success) {
         onAddStudent(response.data.data);
         onClose();
         toast.success("Student added successfully!");
         navigate("/admin/total");
-      } else {  
+      } else {
         console.error("Failed to add student:", response.data.error);
         toast.error("Failed to add student.");
       }
@@ -65,161 +69,190 @@ const AddStudentForm = ({ isOpen, onClose, onAddStudent }) => {
           </div>
 
           <h2 className="text-xl font-semibold mb-4">Add New Student</h2>
-          <form onSubmit={handleSubmit}>
-            {/* Name Input */}
+          <form onSubmit={handleSubmit} noValidate>
             <div className="mb-4">
               <label
                 htmlFor="name"
-                className="block text-sm font-bold text-gray-700 mb-1"
+                className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Name:
+                Name
               </label>
               <input
-                type="text"
                 id="name"
                 name="name"
+                type="text"
+                required
+                className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  errors.name ? "border-red-500" : ""
+                }`}
+                placeholder="Enter your name"
                 value={values.name}
                 onChange={handleChange}
-                placeholder="Enter name"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                required
               />
+              {errors.name && (
+                <p className="text-red-500 text-xs italic">{errors.name}</p>
+              )}
             </div>
 
-            {/* DOB Input */}
             <div className="mb-4">
               <label
-                htmlFor="DOB"
-                className="block text-sm font-bold text-gray-700 mb-1"
+                htmlFor="dob"
+                className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Date of Birth:
+                Date of Birth
               </label>
               <input
+                id="dob"
+                name="DOB" // Use the correct state key
                 type="date"
-                id="DOB"
-                name="DOB"
-                value={values.DOB}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md"
                 required
+                className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  errors.dob ? "border-red-500" : ""
+                }`}
+                value={values.DOB} // Use the correct state key
+                onChange={handleChange}
               />
+              {errors.dob && (
+                <p className="text-red-500 text-xs italic">{errors.dob}</p>
+              )}
             </div>
 
-            {/* Symbol Input */}
             <div className="mb-4">
               <label
                 htmlFor="symbol"
-                className="block text-sm font-bold text-gray-700 mb-1"
+                className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Symbol:
+                Symbol No
               </label>
               <input
-                type="text"
                 id="symbol"
                 name="symbol"
+                type="text"
+                required
+                className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  errors.symbol ? "border-red-500" : ""
+                }`}
+                placeholder="Enter your symbol number"
                 value={values.symbol}
                 onChange={handleChange}
-                placeholder="Enter symbol"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                required
               />
+              {errors.symbol && (
+                <p className="text-red-500 text-xs italic">{errors.symbol}</p>
+              )}
             </div>
 
-            {/* Email Input */}
             <div className="mb-4">
               <label
                 htmlFor="email"
-                className="block text-sm font-bold text-gray-700 mb-1"
+                className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Email:
+                Email
               </label>
               <input
-                type="email"
                 id="email"
                 name="email"
+                type="email"
+                required
+                className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  errors.email ? "border-red-500" : ""
+                }`}
+                placeholder="Enter your email"
                 value={values.email}
                 onChange={handleChange}
-                placeholder="Enter email"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                required
               />
+              {errors.email && (
+                <p className="text-red-500 text-xs italic">{errors.email}</p>
+              )}
             </div>
 
-            {/* Password Input */}
             <div className="mb-4">
               <label
                 htmlFor="password"
-                className="block text-sm font-bold text-gray-700 mb-1"
+                className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Password:
+                Password
               </label>
               <input
-                type="password"
                 id="password"
                 name="password"
+                type="password"
+                required
+                className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  errors.password ? "border-red-500" : ""
+                }`}
+                placeholder="Enter your password"
                 value={values.password}
                 onChange={handleChange}
-                placeholder="Enter password"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                required
               />
+              {errors.password && (
+                <p className="text-red-500 text-xs italic">{errors.password}</p>
+              )}
             </div>
 
-            {/* Phone Input */}
             <div className="mb-4">
               <label
                 htmlFor="phone"
-                className="block text-sm font-bold text-gray-700 mb-1"
+                className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Phone:
+                Phone
               </label>
               <input
-                type="text"
                 id="phone"
                 name="phone"
+                type="tel"
+                required
+                className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  errors.phone ? "border-red-500" : ""
+                }`}
+                placeholder="Enter your phone number"
                 value={values.phone}
                 onChange={handleChange}
-                placeholder="Enter phone"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                required
               />
+              {errors.phone && (
+                <p className="text-red-500 text-xs italic">{errors.phone}</p>
+              )}
             </div>
 
-            {/* Address Input */}
             <div className="mb-4">
               <label
                 htmlFor="address"
-                className="block text-sm font-bold text-gray-700 mb-1"
+                className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Address:
+                Address
               </label>
               <input
-                type="text"
                 id="address"
                 name="address"
+                type="text"
+                required
+                className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  errors.address ? "border-red-500" : ""
+                }`}
+                placeholder="Enter your address"
                 value={values.address}
                 onChange={handleChange}
-                placeholder="Enter address"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                required
               />
+              {errors.address && (
+                <p className="text-red-500 text-xs italic">{errors.address}</p>
+              )}
             </div>
 
-            {/* Program Input */}
             <div className="mb-4">
               <label
                 htmlFor="program"
-                className="block text-sm font-bold text-gray-700 mb-1"
+                className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Program:
+                Program
               </label>
               <select
                 id="program"
                 name="program"
+                required
+                className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  errors.program ? "border-red-500" : ""
+                }`}
                 value={values.program}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                required
               >
                 <option value="" disabled>
                   Select Program
@@ -232,23 +265,27 @@ const AddStudentForm = ({ isOpen, onClose, onAddStudent }) => {
                   Bachelor's in Business Administration
                 </option>
               </select>
+              {errors.program && (
+                <p className="text-red-500 text-xs italic">{errors.program}</p>
+              )}
             </div>
 
-            {/* Semester Input */}
             <div className="mb-4">
               <label
                 htmlFor="semester"
-                className="block text-sm font-bold text-gray-700 mb-1"
+                className="block text-gray-700 text-sm font-bold mb-2"
               >
-                Semester:
+                Semester
               </label>
               <select
                 id="semester"
                 name="semester"
+                required
+                className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
+                  errors.semester ? "border-red-500" : ""
+                }`}
                 value={values.semester}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md"
-                required
               >
                 <option value="" disabled>
                   Select Semester
@@ -262,15 +299,17 @@ const AddStudentForm = ({ isOpen, onClose, onAddStudent }) => {
                 <option value="7">Seventh</option>
                 <option value="8">Eighth</option>
               </select>
+              {errors.semester && (
+                <p className="text-red-500 text-xs italic">{errors.semester}</p>
+              )}
             </div>
 
-            {/* Submit Button */}
-            <div className="flex justify-end">
+            <div className="flex items-center justify-between">
               <button
                 type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               >
-                Add Student
+                Register
               </button>
             </div>
           </form>

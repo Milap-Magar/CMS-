@@ -1,8 +1,14 @@
 const reg_validation = (values) => {
   const errors = {};
 
-  if (!values.name) {
+  if (!values.name || values.name.trim() === "") {
     errors.name = "Name is required";
+  } else if (!/^[a-zA-Z\s]+$/.test(values.name)) {
+    errors.name = "Name must contain only letters and spaces";
+  } else if (values.name.length < 2) {
+    errors.name = "Name must be at least 2 characters long";
+  } else if (values.name.length > 50) {
+    errors.name = "Name must be less than 50 characters";
   }
   if (!values.email) {
     errors.email = "Email is required";
@@ -14,7 +20,7 @@ const reg_validation = (values) => {
   } else if (
     !/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/.test(values.password)
   ) {
-    errors.password = "password address is invalid";
+    errors.password = "password must contain Capital and Number";
   }
   if (!values.phone) {
     errors.phone = "Phone number is required";

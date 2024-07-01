@@ -115,13 +115,13 @@ function Register() {
               </label>
               <input
                 id="dob"
-                name="DOB" // Use the correct state key
+                name="DOB" 
                 type="date"
                 required
                 className={`appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${
                   errors.dob ? "border-red-500" : ""
                 }`}
-                value={values.DOB} // Use the correct state key
+                value={values.DOB}
                 onChange={handleChange}
               />
               {errors.dob && (

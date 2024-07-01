@@ -92,7 +92,7 @@ const SubAdmin = () => {
     e.preventDefault();
 
     if (!validateForm()) {
-      toast.error("Please fill out the form correctly.", {
+      toast.error("Please fill all the required feildset", {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -149,7 +149,7 @@ const SubAdmin = () => {
             address={`Patandhoka, Lalitpur-13`}
           />
         </div>
-        <div className="flex flex-col md:flex-row flex-grow w-full relative">
+        <div className="flex flex-col md:flex-row flex-grow w-full relative overflow-x-hidden overflow-y-scroll">
           <Aside isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
           <form
             onSubmit={handleSubmit}

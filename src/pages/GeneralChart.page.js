@@ -45,7 +45,7 @@ const ComplaintsChart = () => {
 
         if (response.data.success) {
           const complaints = response.data.complaints;
-          console.log("🚀 ~ fetchComplaintsData ~ complaints:", complaints);
+          // console.log("🚀 ~ fetchComplaintsData ~ complaints:", complaints);
           const categories = ["General", "Admin", "Accounts", "Other"];
 
           setChartData({
